@@ -10,10 +10,10 @@ import java.util.List;
 public class ExerciseCodeContainer {
 
     public static String lireExercice(int numeroExo) {
-        String cheminFichier = "/src/main/java/resources/textesExos/Exercice" + numeroExo + ".txt";
+        String cheminFichier = "miage-code-crafting\\src\\main\\resources\\textesExos\\Exercice" + numeroExo + ".txt";
 
         try {
-            List<String> lignes = Files.readAllLines(Paths.get(System.getProperty("user.dir"), cheminFichier));
+            List<String> lignes = Files.readAllLines(Paths.get(cheminFichier));
 
 
             StringBuilder sb = new StringBuilder();
@@ -31,4 +31,5 @@ public class ExerciseCodeContainer {
     public static String lireCorrection(int numeroCorr){
         return lireExercice(numeroCorr);
     }
+
 }
