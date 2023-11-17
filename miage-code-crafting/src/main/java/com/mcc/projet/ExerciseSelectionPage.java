@@ -230,19 +230,19 @@ public class ExerciseSelectionPage extends Application {
 		HBox[] hBoxExos = new HBox[10];
 		Button[] boutonsFeedback = new Button[hBoxExos.length];
 		Class<?> clazz = this.getClass();
-		String chemin = "/images/sablier-1-noir.png";
+		/*String chemin = "/src/main/resources/image/sablier-1-noir.png";
 		InputStream input = clazz.getResourceAsStream(chemin);
 		Image sablierBlanc = new Image(input);
 		ImageView sablierBlancView = new ImageView(sablierBlanc);
 		sablierBlancView.setImage(sablierBlanc);
 		sablierBlancView.setCache(true);
 		sablierBlancView.setFitWidth(30);
-		sablierBlancView.setFitHeight(20);
+		sablierBlancView.setFitHeight(20);*/
 		for (int i1 = 0; i1 < hBoxExos.length; i1++) {
 		    hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
 		    hBoxExos[i1].setSpacing(10);
 		    boutonsFeedback[i1] = new Button();
-			boutonsFeedback[i1].setGraphic(sablierBlancView);
+			//boutonsFeedback[i1].setGraphic(sablierBlancView);
 			boutonsFeedback[i1].setPrefSize(30, 20);
 
 		    

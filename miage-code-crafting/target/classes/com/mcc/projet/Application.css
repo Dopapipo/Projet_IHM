@@ -1,20 +1,23 @@
 .root{ /* fond de la scene */
-	-fx-background-color:rgb(23, 61, 228);/* couleur de fond, un peu visible dans les coins sous la VBox et la ButtonBar. darkkhaki est une des nombreuses couleurs prédéfinies  */ 
+	background-color:rgb(23, 61, 228);/* couleur de fond, un peu visible dans les coins sous la VBox et la ButtonBar. darkkhaki est une des nombreuses couleurs prédéfinies  */ 
 }
 
 
 
 VBox{
-	-fx-background-color:rgb(255, 239, 214);
+	background-color:rgb(255, 239, 214);
 	-fx-border-color:rgba(164, 85, 6, 0.597);
 	-fx-border-radius:0 0 10 10; 
 	-fx-background-radius:0 0 10 10;
 }
 
 Button{
+	background-color:rgb(252, 203, 140); /* Standard CSS property */
+
 	-fx-background-color:rgb(252, 203, 140);/*couleur désignée par ses composantes rouge, vert, bleu */
 	-fx-text-fill:rgb(0, 0, 0);/*couleur du texte 
 	-fx-rotate:-30;/* inclinaison en degrés, compté à partir de l'horizontale dans le sens des aiguilles d'une montre */
+	font-weight:bold;
 	-fx-font-weight:bold;
 	
 }
