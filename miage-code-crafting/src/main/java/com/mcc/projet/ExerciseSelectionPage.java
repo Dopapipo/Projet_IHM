@@ -150,8 +150,8 @@ public class ExerciseSelectionPage extends Application {
 		logoBox.getChildren().addAll(logoButton,logoLabel);
 		//logoButton.setText(logoText);
 		//TODO:
-		// InputStream input = this.getClass().getResourceAsStream("/main/resources/image/logo-craft-fonce.png");
-        // logoButton.setGraphic(new ImageView(new Image(input)));
+		InputStream input = getClass().getResourceAsStream("/image/logo-craft-fonce.png");
+        logoButton.setGraphic(new ImageView(new Image(input)));
         logoButton.setPadding(new Insets(20, 20, 20, 20));
         entete.add(logoBox, 0, 0);
         
@@ -183,6 +183,10 @@ public class ExerciseSelectionPage extends Application {
 		connexionButton.setMaxHeight(100);
 		connexionButton.setPrefWidth(100);
 		connexionButton.setMaxWidth(100);
+
+		input = getClass().getResourceAsStream("/image/discord-noir.png");
+        connexionButton.setGraphic(new ImageView(new Image(input)));
+
         connexion.getChildren().addAll(connexionButton,connexionText);
         //connexion.setPadding(new Insets(20));
 		connexionText.setTextAlignment(TextAlignment.CENTER);
