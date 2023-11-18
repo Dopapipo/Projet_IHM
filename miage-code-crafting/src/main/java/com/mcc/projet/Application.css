@@ -4,22 +4,16 @@
 
 
 
-VBox{
-	background-color:rgb(255, 239, 214);
-	border-color:rgba(164, 85, 6, 0.597);
-	-fx-border-color:rgba(164, 85, 6, 0.597);
-	border-radius: 0 0 10 10;
-	-fx-border-radius:0 0 10 10; 
-	-fx-background-radius:0 0 10 10;
-}
 
 Button{
-	background-color:rgb(252, 203, 140); /* Standard CSS property */
-
-	-fx-background-color:rgb(252, 203, 140);/*couleur désignée par ses composantes rouge, vert, bleu */
+	background-color: rgb(255, 239, 214);
+	-fx-background-color: rgb(232, 204, 167); 
+    -fx-background-radius: 2em; /* Coins arrondis */
+	padding:5px;
+    -fx-padding: 5px; /* Espace intérieur des boutons */
 	-fx-text-fill:rgb(0, 0, 0);/*couleur du texte 
 	-fx-rotate:-30;/* inclinaison en degrés, compté à partir de l'horizontale dans le sens des aiguilles d'une montre */
-	font-weight:bold;
+	font-weight: bold;
 	-fx-font-weight:bold;
 	
 }
