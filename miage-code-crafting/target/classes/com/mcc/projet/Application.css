@@ -6,7 +6,9 @@
 
 VBox{
 	background-color:rgb(255, 239, 214);
+	border-color:rgba(164, 85, 6, 0.597);
 	-fx-border-color:rgba(164, 85, 6, 0.597);
+	border-radius: 0 0 10 10;
 	-fx-border-radius:0 0 10 10; 
 	-fx-background-radius:0 0 10 10;
 }

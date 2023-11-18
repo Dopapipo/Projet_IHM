@@ -22,7 +22,11 @@ import javafx.stage.Stage;
  * This class will be inherited by different exercise/correction pages
  */
 public class ExercisePage extends Application{
-	
+	int numeroExo;
+	public ExercisePage(int numeroExo) {
+		super();
+		this.numeroExo=numeroExo;
+	}
 	@Override
 	public void start(Stage arg0) throws Exception {
 		// TODO Auto-generated method stub
@@ -173,13 +177,13 @@ public class ExercisePage extends Application{
 
 		terminal.setStyle(terminalStyle);
 		codeArea.setStyle(codeAreaStyle);
-		codeArea.setText(ExerciseCodeContainer.lireExercice(1));
+		codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
 		codeArea.setPrefHeight(450);
 		pane11.getChildren().addAll(codeArea,executionSuccess,terminal);
 		
 		
 
-		
+	
 		
 		
 		
@@ -204,6 +208,7 @@ public class ExercisePage extends Application{
 	public static void main(String...args) {
 		launch(args);
 	}
+		
 }
 
 

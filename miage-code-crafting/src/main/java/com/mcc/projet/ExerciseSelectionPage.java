@@ -1,6 +1,4 @@
 package com.mcc.projet;
-import java.io.File;
-import java.io.InputStream;
 
 /*
  * TODO: ->Ajouter des boutons avec les images associées dans chaque HBox (sablier...)
@@ -278,7 +276,9 @@ public class ExerciseSelectionPage extends Application {
 		correction1.setStyle( "-fx-background-color: beige;");
 		exo1.setFont(Font.font("Verdana",FontWeight.BOLD,16));
 		correction1.setFont(Font.font("Verdana",FontWeight.BOLD,16));*/
-		
+		for (int i =0;i<boutonsExos.length/2;i++) {
+			addEventHandler(boutonsExos[2*i], i+1);
+		}
 		for (Button bouton : boutonsExos) {
 		    bouton.setTextFill(Color.web("#F4E1B9"));
 		}
@@ -315,13 +315,7 @@ public class ExerciseSelectionPage extends Application {
 		root.setCenter(pane11);
 		root.setTop(structure);
 		Scene scene = new Scene(root,1000,800);
-		scene.getStylesheets().add("application/application.css");
-		/*Button justForFocus = new Button();
-		justForFocus.setPrefHeight(0);
-		justForFocus.setPrefWidth(0);
-		justForFocus.setStyle("-fx-background-color: white;");
-		pane.getChildren().add(justForFocus);
-		justForFocus.requestFocus();*/
+		scene.getStylesheets().add("miage-code-crafting/src/main/java/com/mcc/projet/Application.css");
 		arg0.setScene(scene);
 		arg0.show();}
 
@@ -333,7 +327,17 @@ public class ExerciseSelectionPage extends Application {
 	    separator.setStyle("-fx-background-color: #C19233;");
 	    container.getChildren().add(separator);
 	}
-	
+	//Pour maintenant ça ouvre une nouvelle fenêtre, mais je vais changer ça avec des vues (TODO Lucian)
+	private static void addEventHandler(Button button, int numeroExo) {
+	    button.setOnAction(event -> {
+	        ExercisePage exercisePage = new ExercisePage(numeroExo);
+	        try {
+	            exercisePage.start(new Stage());
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    });
+	}
 	
 	public static void main(String...args) {
 		launch(args);
