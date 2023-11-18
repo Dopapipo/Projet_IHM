@@ -354,7 +354,9 @@ public class ExerciseSelectionPage extends Application {
 		root.setCenter(spane);
 		root.setTop(structure);
 		Scene scene = new Scene(root,1000,800);
-		scene.getStylesheets().add("miage-code-crafting/src/main/java/com/mcc/projet/Application.css");
+
+		String cssFile = getClass().getResource("Application.css").toExternalForm();
+		scene.getStylesheets().add(cssFile);
 		arg0.setScene(scene);
 		arg0.show();}
 
