@@ -7,6 +7,8 @@ package com.mcc.projet;
  * ->Ajouter les hyperlinks qui renvoient vers les cours associés dans les HBox dex boutons exos
  * ->Ajouter les images à l'entête
  * ->Ajouter une ScrollBar pour l'élément central
+ * ->Ajouter un bouton mode nuit
+ * -> Fix le fetch des stylesheets
  */
 import javafx.application.Application;
 import javafx.geometry.Insets;

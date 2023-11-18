@@ -1,5 +1,11 @@
 package com.mcc.projet;
-
+/*
+ * TODO: Ajouter les boutons feedback,le bouton mode nuit, tous les boutons sur la console
+ * et sur la zone de code. Pour afficher les boutons sur la console et sur la zone de code, il faut
+ * surement utiliser un StackPane, et empiler la textArea et les boutons, avec les boutons au dessus.
+ * Ensuite, il faut mettre la bonne position pour les boutons.
+ * Pas besoin des fonctionnalités pour l'instant, on s'en chargera plus tard.
+ */
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -18,14 +24,16 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
-/*
- * This class will be inherited by different exercise/correction pages
- */
+
 public class ExercisePage extends Application{
 	int numeroExo;
 	public ExercisePage(int numeroExo) {
 		super();
 		this.numeroExo=numeroExo;
+	}
+	public ExercisePage() {
+		super();
+		this.numeroExo=1;
 	}
 	@Override
 	public void start(Stage arg0) throws Exception {
@@ -196,7 +204,6 @@ public class ExercisePage extends Application{
 		root.setCenter(pane11);
 		root.setTop(structure);
 		Scene scene = new Scene(root,1000,800);
-		scene.getStylesheets().add("application/application.css");
 		/*Button justForFocus = new Button();
 		justForFocus.setPrefHeight(0);
 		justForFocus.setPrefWidth(0);
