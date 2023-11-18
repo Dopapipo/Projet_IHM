@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
@@ -38,7 +39,15 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class ExerciseSelectionPage extends Application {
-
+	int numeroExo;
+	public ExerciseSelectionPage(int numeroExo) {
+		super();
+		this.numeroExo=numeroExo;
+	}
+	public ExerciseSelectionPage() {
+		super();
+		this.numeroExo=1;
+	}
 	@Override
 	public void start(Stage arg0) throws Exception {
 		arg0.setMaximized(true);
@@ -137,33 +146,27 @@ public class ExerciseSelectionPage extends Application {
 		structure.setMaxWidth(Double.MAX_VALUE);
 		entete.setPrefWidth(Double.MAX_VALUE);
         entete.setMaxWidth(Double.MAX_VALUE);
-		VBox logoBox = new VBox();
         Button logoButton = new Button();
-		
         String logoText = new String("Miage Code Crafting");
 		Label logoLabel = new Label(logoText);
 		logoLabel.setTextAlignment(TextAlignment.CENTER);
 		logoLabel.setFont(Font.font("Arial Narrow",FontWeight.BOLD,25));
-		logoBox.getChildren().addAll(logoButton,logoLabel);
-		//logoButton.setText(logoText);
-		//TODO:
+		logoLabel.setLabelFor(logoButton);
 		InputStream input = getClass().getResourceAsStream("/image/logo-craft-fonce.png");
 		ImageView imageViewLogo = new ImageView(new Image(input));
 		imageViewLogo.setFitWidth(300); // spécifiez la largeur souhaitée
         imageViewLogo.setFitHeight(100); // spécifiez la hauteur souhaitée
         logoButton.setGraphic(imageViewLogo);
-		
         logoButton.setPadding(new Insets(20, 20, 20, 20));
-        entete.add(logoBox, 0, 0);
-        
+        entete.add(logoButton, 0, 0);
         TextFlow titre = new TextFlow();
         titre.setTextAlignment(TextAlignment.CENTER);
         titre.setPadding(new Insets(20, 150, 20, 150));
-
+		
         Text poo = new Text("INF2 - Programmation Orientée Objet \n");
         poo.setFont(Font.font("Arial Narrow", FontWeight.BOLD, 30));
         poo.setFill(Color.WHITE);
-
+		
         Text miage = new Text("L3 - MIAGE Classique \n");
         miage.setFont(Font.font("Arial Narrow", FontWeight.BOLD, FontPosture.ITALIC, 20));
         miage.setFill(Color.WHITE);
@@ -171,12 +174,12 @@ public class ExerciseSelectionPage extends Application {
         Text universite = new Text("Université Paris 1 Panthéon-Sorbonne");
         universite.setFont(Font.font("Arial", 10));
         universite.setFill(Color.WHITE);
-
-
+		
+		
         titre.getChildren().addAll(poo, miage, universite);
-
+		
         entete.add(titre, 1, 0); // Utilisez la deuxième colonne
-
+		
         VBox connexion = new VBox();
         Label connexionText = new Label("Connexion");
 		Button connexionButton = new Button();
@@ -184,7 +187,7 @@ public class ExerciseSelectionPage extends Application {
 		connexionButton.setMaxHeight(100);
 		connexionButton.setPrefWidth(100);
 		connexionButton.setMaxWidth(100);
-
+		
 		input = getClass().getResourceAsStream("/image/discord-noir.png");
 		ImageView imageViewDiscord = new ImageView(new Image(input));
 		imageViewDiscord.setFitWidth(100);
@@ -198,7 +201,7 @@ public class ExerciseSelectionPage extends Application {
         entete.add(connexion, 2, 0); 
         GridPane corps = new GridPane();
         structure.add(corps, 0, 1, 5, 5);  // Ajoutez le corps sous l'en-tête dans la grille
-
+		
         logoLabel.setTextFill(Color.BLACK);
         poo.setFill(Color.BLACK);
         miage.setFill(Color.BLACK);
@@ -212,9 +215,9 @@ public class ExerciseSelectionPage extends Application {
         ligneSeparator.setStyle("-fx-background-color: #C19233;");
         entete.add(ligneSeparator, 0, 1, 5, 1);
         
-      
+		
 		//-----------------------------------------------------------------
-							//Page Centrale
+		//Page Centrale
         
         
 		Label titrePage = new Label("Exercices d'application");
@@ -250,7 +253,7 @@ public class ExerciseSelectionPage extends Application {
 		pane.getChildren().addAll(sousTitre6);
 		addSeparatorLine(pane);
 		pane.getChildren().addAll(sousTitre7);
-
+		
 		titrePage.setTextFill(Color.WHITE);
 		sousTitre1.setTextFill(Color.WHITE);
 		sousTitre2.setTextFill(Color.WHITE);
@@ -261,38 +264,43 @@ public class ExerciseSelectionPage extends Application {
 		sousTitre7.setTextFill(Color.WHITE);
 		
 		
-
 		
-				//------------Boutons------------\\
+		
+		//------------Boutons------------\\
 		
 		
 		Button[] boutonsExos = new Button[20];
 		HBox[] hBoxExos = new HBox[10];
 		Button[] boutonsFeedback = new Button[hBoxExos.length];
-		Class<?> clazz = this.getClass();
-		/*String chemin = "/src/main/resources/image/sablier-1-noir.png";
-		InputStream input = clazz.getResourceAsStream(chemin);
-		Image sablierBlanc = new Image(input);
-		ImageView sablierBlancView = new ImageView(sablierBlanc);
-		sablierBlancView.setImage(sablierBlanc);
-		sablierBlancView.setCache(true);
-		sablierBlancView.setFitWidth(30);
-		sablierBlancView.setFitHeight(20);*/
 		for (int i1 = 0; i1 < hBoxExos.length; i1++) {
-		    hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
+			hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
 		    hBoxExos[i1].setSpacing(10);
-		    boutonsFeedback[i1] = new Button();
-			//boutonsFeedback[i1].setGraphic(sablierBlancView);
-			
+		    boutonsFeedback[i1] = new Button();			
 			input = getClass().getResourceAsStream("/image/sablier-1-noir.png");
 			ImageView imageViewSablier = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/sablier-2-noir.png");
+			ImageView imageViewSablierEnCours=new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/emoticone-neutre-noir.png");
+			ImageView imageViewBonhommeNeutre = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/emoticone-triste-noir.png");
+			ImageView imageViewBonhommeTriste = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/emoticone-joyeux-noir.png");
+			ImageView imageViewBonhommeContent = new ImageView(new Image(input));
 			imageViewSablier.setFitWidth(20);
 			imageViewSablier.setFitHeight(20);
+			imageViewSablierEnCours.setFitWidth(20);
+			imageViewSablierEnCours.setFitHeight(20);
+			imageViewBonhommeNeutre.setFitWidth(20);
+			imageViewBonhommeNeutre.setFitHeight(20);
+			imageViewBonhommeTriste.setFitWidth(20);
+			imageViewBonhommeTriste.setFitHeight(20);
+			imageViewBonhommeContent.setFitWidth(20);
+			imageViewBonhommeContent.setFitHeight(20);
         	boutonsFeedback[i1].setGraphic(imageViewSablier);
-
+			addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours, imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
 		    
 		    for (int j = 0; j < 2; j++) {
-		        int index = i1 * 2 + j;
+				int index = i1 * 2 + j;
 		        boutonsExos[index] = new Button();
 		        boutonsExos[index].setPrefSize(120, 30);
 		        hBoxExos[i1].getChildren().add(boutonsExos[index]);
@@ -319,13 +327,23 @@ public class ExerciseSelectionPage extends Application {
 		boutonsExos[17].setText("Correction 9");
 		boutonsExos[18].setText("Exercice 10");
 		boutonsExos[19].setText("Correction 10");
-		/*exo1.setStyle( "-fx-background-color: beige;");
-		correction1.setStyle( "-fx-background-color: beige;");
-		exo1.setFont(Font.font("Verdana",FontWeight.BOLD,16));
-		correction1.setFont(Font.font("Verdana",FontWeight.BOLD,16));*/
+		//--------------------------------------------------------------\\
+		//Individual exercise display
+		VBox exos = new VBox(5);
+		TextArea codeArea = new TextArea();
+		Label executionSuccess =new Label();
+		TextArea terminal = new TextArea();
+		String terminalStyle="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
+		String codeAreaStyle="-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white; ";
+
+		terminal.setStyle(terminalStyle);
+		codeArea.setStyle(codeAreaStyle);
+		codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
+		codeArea.setPrefHeight(450);
+		exos.getChildren().addAll(codeArea,executionSuccess,terminal);
 		for (int i =0;i<boutonsExos.length/2;i++) {
-			addEventHandler(boutonsExos[2*i], i+1);
-			addEventHandler(boutonsExos[2*i+1], i+1);
+			this.addEventHandler(boutonsExos[2*i], i+1,root,exos,codeArea);
+			this.addEventHandler(boutonsExos[2*i+1], i+1,root,exos,codeArea);
 		}
 		for (Button bouton : boutonsExos) {
 		    bouton.setTextFill(Color.web("#F4E1B9"));
@@ -356,9 +374,9 @@ public class ExerciseSelectionPage extends Application {
 		pane11.getChildren().addAll(sousTitre7, hBoxExos[8],hBoxExos[9]);
 		addSeparatorLine(pane11);
 		
-		
+		addHandlerToLogoButton(logoButton,root,pane11);
 		//---------------------------------------------------------------\\
-								// Stage & Scene
+		// Stage & Scene
 		root.setLeft(exercices1);
 		ScrollPane spane = new ScrollPane();
 		spane.setContent(pane11);
@@ -381,12 +399,24 @@ public class ExerciseSelectionPage extends Application {
 	    separator.setStyle("-fx-background-color: #C19233;");
 	    container.getChildren().add(separator);
 	}
-	//Pour maintenant ça ouvre une nouvelle fenêtre, mais je vais changer ça avec des vues (TODO Lucian)
-	private static void addEventHandler(Button button, int numeroExo) {
+	private void addEventHandler(Button button, int numeroExo,BorderPane root,VBox exos,TextArea codeArea) {
 	    button.setOnAction(event -> {
-	        ExercisePage exercisePage = new ExercisePage(numeroExo);
 	        try {
-	            exercisePage.start(new Stage());
+				this.numeroExo=numeroExo;
+				codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
+
+	            root.setCenter(exos);
+
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    });
+	}
+	private void addHandlerToLogoButton(Button logoButton,BorderPane root,VBox pane) {
+	    logoButton.setOnAction(event -> {
+	        try {
+	            root.setCenter(pane);
+
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
@@ -395,5 +425,22 @@ public class ExerciseSelectionPage extends Application {
 	
 	public static void main(String...args) {
 		launch(args);
+	}
+	private static void addImageChangerToButton(Button button,ImageView imageViewSablier,ImageView imageViewSablierEnCours,ImageView imageViewBonhommeTriste,ImageView imageViewBonhommeNeutre,ImageView imageViewBonhommeContent) {
+	    button.setOnAction(event -> {
+	        if (button.getGraphic().equals(imageViewSablier)) {
+	            button.setGraphic(imageViewSablierEnCours);
+	        } else if (button.getGraphic().equals(imageViewSablierEnCours)) {
+	            button.setGraphic(imageViewBonhommeTriste);
+	        } else if (button.getGraphic().equals(imageViewBonhommeTriste)) {
+				button.setGraphic(imageViewBonhommeNeutre);;
+			}
+			else if (button.getGraphic().equals(imageViewBonhommeNeutre)) {
+				button.setGraphic(imageViewBonhommeContent);;
+			}
+			else if (button.getGraphic().equals(imageViewBonhommeContent)) {
+				button.setGraphic(imageViewSablier);;
+			}
+	    });
 	}
 }
