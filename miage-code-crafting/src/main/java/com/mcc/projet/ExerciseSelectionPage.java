@@ -283,7 +283,12 @@ public class ExerciseSelectionPage extends Application {
 		    hBoxExos[i1].setSpacing(10);
 		    boutonsFeedback[i1] = new Button();
 			//boutonsFeedback[i1].setGraphic(sablierBlancView);
-			boutonsFeedback[i1].setPrefSize(30, 20);
+			
+			input = getClass().getResourceAsStream("/image/sablier-1-noir.png");
+			ImageView imageViewSablier = new ImageView(new Image(input));
+			imageViewSablier.setFitWidth(20);
+			imageViewSablier.setFitHeight(20);
+        	boutonsFeedback[i1].setGraphic(imageViewSablier);
 
 		    
 		    for (int j = 0; j < 2; j++) {
