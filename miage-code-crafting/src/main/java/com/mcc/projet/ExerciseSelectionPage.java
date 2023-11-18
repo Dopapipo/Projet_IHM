@@ -139,10 +139,7 @@ public class ExerciseSelectionPage extends Application {
         entete.setMaxWidth(Double.MAX_VALUE);
 		VBox logoBox = new VBox();
         Button logoButton = new Button();
-		logoButton.setPrefHeight(100);
-		logoButton.setMaxHeight(100);
-		logoButton.setPrefWidth(200);
-		logoButton.setMaxWidth(200);
+		
         String logoText = new String("Miage Code Crafting");
 		Label logoLabel = new Label(logoText);
 		logoLabel.setTextAlignment(TextAlignment.CENTER);
@@ -151,7 +148,11 @@ public class ExerciseSelectionPage extends Application {
 		//logoButton.setText(logoText);
 		//TODO:
 		InputStream input = getClass().getResourceAsStream("/image/logo-craft-fonce.png");
-        logoButton.setGraphic(new ImageView(new Image(input)));
+		ImageView imageViewLogo = new ImageView(new Image(input));
+		imageViewLogo.setFitWidth(300); // spécifiez la largeur souhaitée
+        imageViewLogo.setFitHeight(100); // spécifiez la hauteur souhaitée
+        logoButton.setGraphic(imageViewLogo);
+		
         logoButton.setPadding(new Insets(20, 20, 20, 20));
         entete.add(logoBox, 0, 0);
         
@@ -185,7 +186,10 @@ public class ExerciseSelectionPage extends Application {
 		connexionButton.setMaxWidth(100);
 
 		input = getClass().getResourceAsStream("/image/discord-noir.png");
-        connexionButton.setGraphic(new ImageView(new Image(input)));
+		ImageView imageViewDiscord = new ImageView(new Image(input));
+		imageViewDiscord.setFitWidth(100);
+		imageViewDiscord.setFitHeight(100);
+        connexionButton.setGraphic(imageViewDiscord);
 
         connexion.getChildren().addAll(connexionButton,connexionText);
         //connexion.setPadding(new Insets(20));
