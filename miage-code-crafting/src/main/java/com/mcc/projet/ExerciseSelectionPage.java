@@ -43,6 +43,8 @@ public class ExerciseSelectionPage extends Application {
 	public void start(Stage arg0) throws Exception {
 		arg0.setMaximized(true);
 		arg0.setResizable(false);
+		arg0.setMaximized(true);
+		arg0.setResizable(false);
 		BorderPane root = new BorderPane();
 		VBox exercices = new VBox(30);
 		exercices.setPadding(new Insets(100,20,150,20));
@@ -132,6 +134,8 @@ public class ExerciseSelectionPage extends Application {
         structure.add(entete, 0, 0, 3, 1); // Utilisez trois colonnes
 		structure.setMaxWidth(Double.MAX_VALUE);
 		entete.setPrefWidth(Double.MAX_VALUE);
+		structure.setMaxWidth(Double.MAX_VALUE);
+		entete.setPrefWidth(Double.MAX_VALUE);
         entete.setMaxWidth(Double.MAX_VALUE);
 		VBox logoBox = new VBox();
         Button logoButton = new Button();
@@ -183,6 +187,14 @@ public class ExerciseSelectionPage extends Application {
         //connexion.setPadding(new Insets(20));
 		connexionText.setTextAlignment(TextAlignment.CENTER);
 		connexionText.setFont(Font.font("Arial Narrow",FontWeight.NORMAL,20));
+		connexionButton.setPrefHeight(100);
+		connexionButton.setMaxHeight(100);
+		connexionButton.setPrefWidth(100);
+		connexionButton.setMaxWidth(100);
+        connexion.getChildren().addAll(connexionButton,connexionText);
+        //connexion.setPadding(new Insets(20));
+		connexionText.setTextAlignment(TextAlignment.CENTER);
+		connexionText.setFont(Font.font("Arial Narrow",FontWeight.NORMAL,20));
         entete.add(connexion, 2, 0); 
         GridPane corps = new GridPane();
         structure.add(corps, 0, 1, 5, 5);  // Ajoutez le corps sous l'en-tête dans la grille
@@ -194,6 +206,7 @@ public class ExerciseSelectionPage extends Application {
         connexionText.setTextFill(Color.BLACK);
 
         Separator ligneSeparator = new Separator();
+        ligneSeparator.setPrefWidth(Double.MAX_VALUE);
         ligneSeparator.setPrefWidth(Double.MAX_VALUE);
         ligneSeparator.setPrefHeight(1);
         ligneSeparator.setStyle("-fx-background-color: #C19233;");
