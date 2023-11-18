@@ -15,9 +15,12 @@ import java.io.InputStream;
  */
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -339,7 +342,11 @@ public class ExerciseSelectionPage extends Application {
 		//---------------------------------------------------------------\\
 								// Stage & Scene
 		root.setLeft(exercices1);
-		root.setCenter(pane11);
+		ScrollPane spane = new ScrollPane();
+		spane.setContent(pane11);
+		spane.setFitToWidth(true);
+		spane.setFitToHeight(true);
+		root.setCenter(spane);
 		root.setTop(structure);
 		Scene scene = new Scene(root,1000,800);
 		scene.getStylesheets().add("miage-code-crafting/src/main/java/com/mcc/projet/Application.css");
