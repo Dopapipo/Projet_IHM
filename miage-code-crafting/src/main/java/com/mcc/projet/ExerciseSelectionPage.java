@@ -1,14 +1,17 @@
 package com.mcc.projet;
 
+import java.io.InputStream;
+
 /*
  * TODO: ->Ajouter des boutons avec les images associées dans chaque HBox (sablier...)
  * ->Ajouter des EventHandlers à tous les boutons : les boutons exo x et correction x font passer à une vue ExercisePage associée
  * ->Les boutons sablier etc... changent d'image en fonction de l'image qu'ils ont déjà dans les HBox des boutons exos
  * ->Ajouter les hyperlinks qui renvoient vers les cours associés dans les HBox dex boutons exos
- * ->Ajouter les images à l'entête
+ * ->Ajouter les images aux boutons de l'entête
  * ->Ajouter une ScrollBar pour l'élément central
  * ->Ajouter un bouton mode nuit
- * -> Fix le fetch des stylesheets
+ * ->Fix le fetch des stylesheets
+ * ->Fix le dimensionnement de l'entête
  */
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -35,7 +38,8 @@ public class ExerciseSelectionPage extends Application {
 
 	@Override
 	public void start(Stage arg0) throws Exception {
-
+		arg0.setMaximized(true);
+		arg0.setResizable(false);
 		BorderPane root = new BorderPane();
 		VBox exercices = new VBox(30);
 		exercices.setPadding(new Insets(100,20,150,20));
@@ -123,13 +127,26 @@ public class ExerciseSelectionPage extends Application {
         GridPane entete = new GridPane();
         entete.setStyle("-fx-background-color: #C19233;");
         structure.add(entete, 0, 0, 3, 1); // Utilisez trois colonnes
+		structure.setMaxWidth(Double.MAX_VALUE);
+		entete.setPrefWidth(Double.MAX_VALUE);
         entete.setMaxWidth(Double.MAX_VALUE);
-        arg0.setResizable(false);
-        HBox logo = new HBox();
-        Label logoText = new Label("Miage Code Crafting");
-        logo.getChildren().addAll(logoText);
-        logo.setPadding(new Insets(20, 20, 20, 20));
-        entete.add(logo, 0, 0);
+		VBox logoBox = new VBox();
+        Button logoButton = new Button();
+		logoButton.setPrefHeight(100);
+		logoButton.setMaxHeight(100);
+		logoButton.setPrefWidth(200);
+		logoButton.setMaxWidth(200);
+        String logoText = new String("Miage Code Crafting");
+		Label logoLabel = new Label(logoText);
+		logoLabel.setTextAlignment(TextAlignment.CENTER);
+		logoLabel.setFont(Font.font("Arial Narrow",FontWeight.BOLD,25));
+		logoBox.getChildren().addAll(logoButton,logoLabel);
+		//logoButton.setText(logoText);
+		//TODO:
+		// InputStream input = this.getClass().getResourceAsStream("/main/resources/image/logo-craft-fonce.png");
+        // logoButton.setGraphic(new ImageView(new Image(input)));
+        logoButton.setPadding(new Insets(20, 20, 20, 20));
+        entete.add(logoBox, 0, 0);
         
         TextFlow titre = new TextFlow();
         titre.setTextAlignment(TextAlignment.CENTER);
@@ -154,20 +171,27 @@ public class ExerciseSelectionPage extends Application {
 
         VBox connexion = new VBox();
         Label connexionText = new Label("Connexion");
-        connexion.getChildren().addAll(connexionText);
-        connexion.setPadding(new Insets(20));
+		Button connexionButton = new Button();
+		connexionButton.setPrefHeight(100);
+		connexionButton.setMaxHeight(100);
+		connexionButton.setPrefWidth(100);
+		connexionButton.setMaxWidth(100);
+        connexion.getChildren().addAll(connexionButton,connexionText);
+        //connexion.setPadding(new Insets(20));
+		connexionText.setTextAlignment(TextAlignment.CENTER);
+		connexionText.setFont(Font.font("Arial Narrow",FontWeight.NORMAL,20));
         entete.add(connexion, 2, 0); 
         GridPane corps = new GridPane();
         structure.add(corps, 0, 1, 5, 5);  // Ajoutez le corps sous l'en-tête dans la grille
 
-        logoText.setTextFill(Color.BLACK);
+        logoLabel.setTextFill(Color.BLACK);
         poo.setFill(Color.BLACK);
         miage.setFill(Color.BLACK);
         universite.setFill(Color.BLACK);
         connexionText.setTextFill(Color.BLACK);
 
         Separator ligneSeparator = new Separator();
-        ligneSeparator.setPrefWidth(1300);
+        ligneSeparator.setPrefWidth(Double.MAX_VALUE);
         ligneSeparator.setPrefHeight(1);
         ligneSeparator.setStyle("-fx-background-color: #C19233;");
         entete.add(ligneSeparator, 0, 1, 5, 1);
@@ -280,6 +304,7 @@ public class ExerciseSelectionPage extends Application {
 		correction1.setFont(Font.font("Verdana",FontWeight.BOLD,16));*/
 		for (int i =0;i<boutonsExos.length/2;i++) {
 			addEventHandler(boutonsExos[2*i], i+1);
+			addEventHandler(boutonsExos[2*i+1], i+1);
 		}
 		for (Button bouton : boutonsExos) {
 		    bouton.setTextFill(Color.web("#F4E1B9"));
