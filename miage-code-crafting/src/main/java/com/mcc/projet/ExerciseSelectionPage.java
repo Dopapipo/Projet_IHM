@@ -329,7 +329,7 @@ public class ExerciseSelectionPage extends Application {
 		boutonsExos[18].setText("Exercice 10");
 		boutonsExos[19].setText("Correction 10");
 		//--------------------------------------------------------------\\
-		//Individual exercise display
+						//Individual exercise display\\
 		VBox exos = new VBox(5);
 		TextArea codeArea = new TextArea();
 		Label executionSuccess =new Label();
@@ -349,12 +349,9 @@ public class ExerciseSelectionPage extends Application {
 		for (Button bouton : boutonsExos) {
 		    bouton.setTextFill(Color.web("#F4E1B9"));
 		}
-		/*
-		VBox pane1 = new VBox(9);
-		pane1.setStyle("-fx-background-color: #0E336A;");
-		pane1.setPadding(new Insets(50));
-		pane1.getChildren().addAll(titrePage,sousTitre1,hBoxExos[0],sousTitre2,hBoxExos[1],hBoxExos[2],hBoxExos[3],sousTitre3,hBoxExos[4],sousTitre4,hBoxExos[5],sousTitre5,hBoxExos[6],sousTitre6,hBoxExos[7],sousTitre7,hBoxExos[8],hBoxExos[9]);
-		*/
+
+
+						//--Central Page Selection Screen--\\
 		VBox pane11 = new VBox(9);
 		pane11.setStyle("-fx-background-color: #0E336A;");
 		pane11.setPadding(new Insets(50));
@@ -375,11 +372,11 @@ public class ExerciseSelectionPage extends Application {
 		pane11.getChildren().addAll(sousTitre7, hBoxExos[8],hBoxExos[9]);
 		addSeparatorLine(pane11);
 		
-		addHandlerToLogoButton(logoButton,root,pane11);
 		//---------------------------------------------------------------\\
-		// Stage & Scene
+		// Stage & Scene + scrollbar
 		root.setLeft(exercices1);
 		ScrollPane spane = new ScrollPane();
+		addHandlerToLogoButton(logoButton,root,spane);
 		spane.setContent(pane11);
 		spane.setFitToWidth(true);
 		spane.setFitToHeight(true);
@@ -413,7 +410,7 @@ public class ExerciseSelectionPage extends Application {
 	        }
 	    });
 	}
-	private void addHandlerToLogoButton(Button logoButton,BorderPane root,VBox pane) {
+	private void addHandlerToLogoButton(Button logoButton,BorderPane root,ScrollPane pane) {
 	    logoButton.setOnAction(event -> {
 	        try {
 	            root.setCenter(pane);
