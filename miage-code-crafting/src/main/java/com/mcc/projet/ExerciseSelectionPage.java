@@ -36,6 +36,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class ExerciseSelectionPage extends Application {
@@ -162,7 +163,7 @@ public class ExerciseSelectionPage extends Application {
         TextFlow titre = new TextFlow();
         titre.setTextAlignment(TextAlignment.CENTER);
         titre.setPadding(new Insets(20, 150, 20, 150));
-		
+		entete.setHgap(100);
         Text poo = new Text("INF2 - Programmation Orientée Objet \n");
         poo.setFont(Font.font("Arial Narrow", FontWeight.BOLD, 30));
         poo.setFill(Color.WHITE);
@@ -384,8 +385,8 @@ public class ExerciseSelectionPage extends Application {
 		spane.setFitToHeight(true);
 		root.setCenter(spane);
 		root.setTop(structure);
+		addPopupToButton(connexionButton);
 		Scene scene = new Scene(root,1000,800);
-
 		String cssFile = getClass().getResource("Application.css").toExternalForm();
 		scene.getStylesheets().add(cssFile);
 		arg0.setScene(scene);
@@ -425,6 +426,17 @@ public class ExerciseSelectionPage extends Application {
 	
 	public static void main(String...args) {
 		launch(args);
+	}
+	private static void addPopupToButton(Button button) {
+	    button.setOnAction(event -> {
+			ConnexionScreen popup = new ConnexionScreen();
+			try {
+				popup.start(new Stage());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	    });
 	}
 	private static void addImageChangerToButton(Button button,ImageView imageViewSablier,ImageView imageViewSablierEnCours,ImageView imageViewBonhommeTriste,ImageView imageViewBonhommeNeutre,ImageView imageViewBonhommeContent) {
 	    button.setOnAction(event -> {
