@@ -228,13 +228,12 @@ public class ExerciseSelectionPage extends Application {
 
 		
         Button[] boutonsExos = new Button[20];
-		Button[] boutonsFeedback = new Button[10];
         HBox[] hBoxExos = new HBox[10];
-        
+        Button[] boutonsFeedback = new Button[hBoxExos.length];
 
         String[] liensURL = {
             "https://java.l3.miage.dev/langage_java/structure_fondamentale.html",
-            "https://java.l3.miage.dev/langage_java/premiere_classe.html",
+            "https://java.l3.miage.d	&aev/langage_java/premiere_classe.html",
             "https://java.l3.miage.dev/langage_java/structures_de_controle.html",
             "https://java.l3.miage.dev/langage_java/generiques.html",
             "https://java.l3.miage.dev/index.html",
@@ -275,7 +274,6 @@ public class ExerciseSelectionPage extends Application {
 			Hyperlink lienURL = new Hyperlink("Voir cours");
 			lienURL.getStyleClass().add("hyperlink");  // Ajoute la classe de style
 			lienURL.setOnAction(e -> getHostServices().showDocument(liensURL[finalI1]));
-			
 
             for (int j = 0; j < 2; j++) {
                 int index = i1 * 2 + j;
@@ -285,7 +283,7 @@ public class ExerciseSelectionPage extends Application {
             }
 
             hBoxExos[i1].getChildren().addAll(boutonsFeedback[i1]); 
-			hBoxExos[i1].getChildren().add(lienURL);
+			hBoxExos[i1].getChildren().addAll(lienURL);
 
 			
         }
