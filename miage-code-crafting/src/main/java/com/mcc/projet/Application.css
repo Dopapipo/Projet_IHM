@@ -2,7 +2,10 @@
 	background-color:rgb(23, 61, 228);/* couleur de fond, un peu visible dans les coins sous la VBox et la ButtonBar. darkkhaki est une des nombreuses couleurs prédéfinies  */ 
 }
 
-
+.hyperlink {
+    -fx-text-fill: #2196F3; /* Couleur du texte du lien */
+    -fx-underline: true;   /* Soulignement du lien */
+}
 
 
 Button{
