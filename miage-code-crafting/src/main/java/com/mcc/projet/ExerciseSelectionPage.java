@@ -233,12 +233,15 @@ public class ExerciseSelectionPage extends Application {
 
         String[] liensURL = {
             "https://java.l3.miage.dev/langage_java/structure_fondamentale.html",
-            "https://java.l3.miage.d	&aev/langage_java/premiere_classe.html",
-            "https://java.l3.miage.dev/langage_java/structures_de_controle.html",
-            "https://java.l3.miage.dev/langage_java/generiques.html",
+            "https://java.l3.miage.dev/langage_java/premiere_classe.html",
+            "https://java.l3.miage.dev/langage_java/premiere_classe.html",
+            "https://java.l3.miage.dev/langage_java/types_primitifs.html",
+			"https://java.l3.miage.dev/langage_java/structures_de_controle.html",
             "https://java.l3.miage.dev/index.html",
             "https://java.l3.miage.dev/index.html",
+			"https://java.l3.miage.dev/langage_java/generiques.html",
             "https://java.l3.miage.dev/langage_java/les_lambdas.html",
+			"https://java.l3.miage.dev/langage_java/les_lambdas.html"
         };
 
         
@@ -271,7 +274,7 @@ public class ExerciseSelectionPage extends Application {
 
 			
 			final int finalI1 = i1;
-			Hyperlink lienURL = new Hyperlink("Voir cours");
+			Hyperlink lienURL = new Hyperlink("Voir le cours");
 			lienURL.getStyleClass().add("hyperlink");  // Ajoute la classe de style
 			lienURL.setOnAction(e -> getHostServices().showDocument(liensURL[finalI1]));
 
