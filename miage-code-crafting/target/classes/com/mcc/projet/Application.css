@@ -2,7 +2,10 @@
 	background-color:rgb(23, 61, 228);/* couleur de fond, un peu visible dans les coins sous la VBox et la ButtonBar. darkkhaki est une des nombreuses couleurs prédéfinies  */ 
 }
 
-
+.hyperlink {
+    -fx-text-fill: #2196F3; /* Couleur du texte du lien */
+    -fx-underline: true;   /* Soulignement du lien */
+}
 
 
 Button{
@@ -26,4 +29,16 @@ Button:hover{ /*pseudo-classe désignant un bouton sur lequel passe la souris */
 
 Button:active { /* pseudo-classe désignant un bouton sur lequel on clique */
     -fx-effect:innershadow(three-pass-box,rgb(248, 141, 192),10,0,0,0);/* ombrage intérieur */
+}
+Label {
+	font-family: 'Consolas';
+	-fx-font-family: 'Consolas';
+}
+.hyperlink {
+	-fx-text-fill: rgb(232, 204, 167); /* Couleur du texte du lien */
+	-fx-underline: true;   /* Soulignement du lien */
+	font-size: 16px;
+	-fx-font-size: 16px;
+	font-style: italic;
+	-fx-font-style: italic;
 }

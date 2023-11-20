@@ -64,6 +64,7 @@ public class ExercisePage extends Application {
 		exercices.setPadding(new Insets(100, 20, 150, 20));
 		exercices.setStyle("-fx-background-color: #0E336A;");
 		Label[] labelsListeExos = new Label[8];
+<<<<<<< HEAD
 		// --------------------Labels liste exos-------------------\\
 
 		/*
@@ -103,11 +104,17 @@ public class ExercisePage extends Application {
 		 * exercices1.getChildren().add(verticalLine);
 		 */ // ca marche pas
 
+=======
+		//--------------------Labels liste exos-------------------\\
+		
+		
+>>>>>>> 692c042a542a0ae355db07f59a61fb5a428c691f
 		VBox exercices1 = new VBox(10); // 10 est l'espace vertical entre les éléments
 		exercices1.setPadding(new Insets(100, 20, 150, 20));
 		exercices1.setStyle("-fx-background-color: #0E336A;");
 
 		for (int i = 0; i < labelsListeExos.length; i++) {
+<<<<<<< HEAD
 			labelsListeExos[i] = new Label();
 			labelsListeExos[i].setFont(Font.font("Verdana", 13));
 			exercices1.getChildren().add(labelsListeExos[i]);
@@ -137,6 +144,22 @@ public class ExercisePage extends Application {
 
 		for (Label label : labelsListeExos) {
 			label.setTextFill(Color.WHITE);
+=======
+		    labelsListeExos[i] = new Label();
+		    labelsListeExos[i].setFont(Font.font("Verdana", 13));
+		    exercices1.getChildren().add(labelsListeExos[i]);
+
+		    // Ajoutez une ligne Separator après chaque Label, sauf après le dernier
+		    if (i < labelsListeExos.length - 1) {
+		        Separator separator = new Separator();
+		        separator.setPadding(new Insets(5, 0, 5, 0)); // Ajustez l'espacement comme vous le souhaitez
+		        exercices1.getChildren().add(separator);
+		    }
+
+		    labelsListeExos[i].setTextAlignment(TextAlignment.JUSTIFY);
+		    labelsListeExos[i].setWrapText(true);
+		    labelsListeExos[i].setPrefWidth(170);
+>>>>>>> 692c042a542a0ae355db07f59a61fb5a428c691f
 		}
 
 		// ---------------------------------------------------------------------------
