@@ -1,4 +1,6 @@
 package com.mcc.projet;
+import javafx.scene.control.Hyperlink;
+//import javafx.scene.layout.StackPane;
 
 import java.io.InputStream;
 
@@ -15,11 +17,11 @@ import java.io.InputStream;
  */
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
+//import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
+//import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.TextArea;
@@ -36,7 +38,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-import javafx.stage.Popup;
+//import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class ExerciseSelectionPage extends Application {
@@ -50,7 +52,7 @@ public class ExerciseSelectionPage extends Application {
 		this.numeroExo=1;
 	}
 	@Override
-	public void start(Stage arg0) throws Exception {
+	public void start ( Stage arg0) throws Exception {
 		arg0.setMaximized(true);
 		arg0.setResizable(false);
 		arg0.setMaximized(true);
@@ -62,40 +64,6 @@ public class ExerciseSelectionPage extends Application {
 		Label[] labelsListeExos = new Label[8];
 		//--------------------Labels liste exos-------------------\\
 		
-		/*
-		VBox exercices1 = new XVBox(10); // 10 est l'espace vertical entre les éléments
-		exercices1.setPadding(new Insets(100, 20, 150, 20));
-		exercices1.setStyle("-fx-background-color: #0E336A;");
-		
-
-		for (int i = 0; i < labelsListeExos.length; i++) {
-		    labelsListeExos[i] = new Label();
-		    labelsListeExos[i].setFont(Font.font("Verdana", 13));
-		    exercices1.getChildren().add(labelsListeExos[i]);
-		    labelsListeExos[i].setTextAlignment(TextAlignment.JUSTIFY);
-		    labelsListeExos[i].setWrapText(true);
-		    labelsListeExos[i].setPrefWidth(170);
-		}
-
-		labelsListeExos[0].setText("Sujets d'exercices :");
-		labelsListeExos[1].setText("Structure fondamentale du langage");
-		labelsListeExos[2].setText("Démarrage");
-		labelsListeExos[3].setText("Algorithme de César");
-		labelsListeExos[4].setText("Reconnaissance de mains dans un jeu de poker");
-		labelsListeExos[5].setText("Poker Fermé");
-		labelsListeExos[6].setText("Les Méthodes");
-		labelsListeExos[7].setText("Lambda");
-
-		root.setLeft(exercices1);
-
-		for (Label label : labelsListeExos) {
-		    label.setTextFill(Color.WHITE);
-		} */
-		/*
-		Line verticalLine = new Line();
-		verticalLine.setStyle("-fx-stroke: #C19233;"); // Couleur de la ligne
-		exercices1.getChildren().add(verticalLine);
-		*/ //ca marche pas 
 		
 		VBox exercices1 = new VBox(10); // 10 est l'espace vertical entre les éléments
 		exercices1.setPadding(new Insets(100, 20, 150, 20));
@@ -264,70 +232,87 @@ public class ExerciseSelectionPage extends Application {
 		sousTitre6.setTextFill(Color.WHITE);
 		sousTitre7.setTextFill(Color.WHITE);
 		
-		
-		
-		
 		//------------Boutons------------\\
+
 		
-		
-		Button[] boutonsExos = new Button[20];
-		HBox[] hBoxExos = new HBox[10];
-		Button[] boutonsFeedback = new Button[hBoxExos.length];
-		for (int i1 = 0; i1 < hBoxExos.length; i1++) {
-			hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
-		    hBoxExos[i1].setSpacing(10);
-		    boutonsFeedback[i1] = new Button();			
-			input = getClass().getResourceAsStream("/image/sablier-1-noir.png");
-			ImageView imageViewSablier = new ImageView(new Image(input));
-			input = getClass().getResourceAsStream("/image/sablier-2-noir.png");
-			ImageView imageViewSablierEnCours=new ImageView(new Image(input));
-			input = getClass().getResourceAsStream("/image/emoticone-neutre-noir.png");
-			ImageView imageViewBonhommeNeutre = new ImageView(new Image(input));
-			input = getClass().getResourceAsStream("/image/emoticone-triste-noir.png");
-			ImageView imageViewBonhommeTriste = new ImageView(new Image(input));
-			input = getClass().getResourceAsStream("/image/emoticone-joyeux-noir.png");
-			ImageView imageViewBonhommeContent = new ImageView(new Image(input));
-			imageViewSablier.setFitWidth(20);
-			imageViewSablier.setFitHeight(20);
-			imageViewSablierEnCours.setFitWidth(20);
-			imageViewSablierEnCours.setFitHeight(20);
-			imageViewBonhommeNeutre.setFitWidth(20);
-			imageViewBonhommeNeutre.setFitHeight(20);
-			imageViewBonhommeTriste.setFitWidth(20);
-			imageViewBonhommeTriste.setFitHeight(20);
-			imageViewBonhommeContent.setFitWidth(20);
-			imageViewBonhommeContent.setFitHeight(20);
-        	boutonsFeedback[i1].setGraphic(imageViewSablier);
-			addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours, imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
-		    
-		    for (int j = 0; j < 2; j++) {
-				int index = i1 * 2 + j;
-		        boutonsExos[index] = new Button();
-		        boutonsExos[index].setPrefSize(120, 30);
-		        hBoxExos[i1].getChildren().add(boutonsExos[index]);
-		    }
-		    hBoxExos[i1].getChildren().add(boutonsFeedback[i1]);
-		}
-		boutonsExos[0].setText("Exercice 1");
-		boutonsExos[1].setText("Correction 1");
-		boutonsExos[2].setText("Exercice 2");
-		boutonsExos[3].setText("Correction 2");
-		boutonsExos[4].setText("Exercice 3");
-		boutonsExos[5].setText("Correction 3");
-		boutonsExos[6].setText("Exercice 4");
-		boutonsExos[7].setText("Correction 4");
-		boutonsExos[8].setText("Exercice 5");
-		boutonsExos[9].setText("Correction 5");
-		boutonsExos[10].setText("Exercice 6");
-		boutonsExos[11].setText("Correction 6");
-		boutonsExos[12].setText("Exercice 7");
-		boutonsExos[13].setText("Correction 7");
-		boutonsExos[14].setText("Exercice 8");
-		boutonsExos[15].setText("Correction 8");
-		boutonsExos[16].setText("Exercice 9");
-		boutonsExos[17].setText("Correction 9");
-		boutonsExos[18].setText("Exercice 10");
-		boutonsExos[19].setText("Correction 10");
+        Button[] boutonsExos = new Button[20];
+        HBox[] hBoxExos = new HBox[10];
+        Button[] boutonsFeedback = new Button[hBoxExos.length];
+
+        String[] liensURL = {
+            "https://java.l3.miage.dev/langage_java/structure_fondamentale.html",
+            "https://java.l3.miage.dev/langage_java/premiere_classe.html",
+            "https://java.l3.miage.dev/langage_java/structures_de_controle.html",
+            "https://java.l3.miage.dev/langage_java/generiques.html",
+            "https://java.l3.miage.dev/index.html",
+            "https://java.l3.miage.dev/index.html",
+            "https://java.l3.miage.dev/langage_java/les_lambdas.html",
+        };
+        
+        
+        for (int i1 = 0; i1 < hBoxExos.length && i1 < liensURL.length; i1++) {
+            hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
+            hBoxExos[i1].setSpacing(10);
+            boutonsFeedback[i1] = new Button();
+            input = getClass().getResourceAsStream("/image/sablier-1-noir.png");
+            ImageView imageViewSablier = new ImageView(new Image(input));
+            input = getClass().getResourceAsStream("/image/sablier-2-noir.png");
+            ImageView imageViewSablierEnCours = new ImageView(new Image(input));
+            input = getClass().getResourceAsStream("/image/emoticone-neutre-noir.png");
+            ImageView imageViewBonhommeNeutre = new ImageView(new Image(input));
+            input = getClass().getResourceAsStream("/image/emoticone-triste-noir.png");
+            ImageView imageViewBonhommeTriste = new ImageView(new Image(input));
+            input = getClass().getResourceAsStream("/image/emoticone-joyeux-noir.png");
+            ImageView imageViewBonhommeContent = new ImageView(new Image(input));
+            imageViewSablier.setFitWidth(20);
+            imageViewSablier.setFitHeight(20);
+            imageViewSablierEnCours.setFitWidth(20);
+            imageViewSablierEnCours.setFitHeight(20);
+            imageViewBonhommeNeutre.setFitWidth(20);
+            imageViewBonhommeNeutre.setFitHeight(20);
+            imageViewBonhommeTriste.setFitWidth(20);
+            imageViewBonhommeTriste.setFitHeight(20);
+            imageViewBonhommeContent.setFitWidth(20);
+            imageViewBonhommeContent.setFitHeight(20);
+            boutonsFeedback[i1].setGraphic(imageViewSablier);
+            addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours, imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
+
+            
+            
+            for (int j = 0; j < 2; j++) {
+                int index = i1 * 2 + j;
+                boutonsExos[index] = new Button();
+                boutonsExos[index].setPrefSize(120, 30);
+                hBoxExos[i1].getChildren().add(boutonsExos[index]);
+            }
+
+            hBoxExos[i1].getChildren().addAll(boutonsFeedback[i1]); // Déplacez cette ligne pour inclure les boutons
+        }
+
+        boutonsExos[0].setText("Exercice 1");
+        boutonsExos[1].setText("Correction 1");
+        boutonsExos[2].setText("Exercice 2");
+        boutonsExos[3].setText("Correction 2");
+        boutonsExos[4].setText("Exercice 3");
+        boutonsExos[5].setText("Correction 3");
+        boutonsExos[6].setText("Exercice 4");
+        boutonsExos[7].setText("Correction 4");
+        boutonsExos[8].setText("Exercice 5");
+        boutonsExos[9].setText("Correction 5");
+        boutonsExos[10].setText("Exercice 6");
+        boutonsExos[11].setText("Correction 6");
+        boutonsExos[12].setText("Exercice 7");
+        boutonsExos[13].setText("Correction 7");
+        boutonsExos[14].setText("Exercice 8");
+        boutonsExos[15].setText("Correction 8");
+        boutonsExos[16].setText("Exercice 9");
+        boutonsExos[17].setText("Correction 9");
+        boutonsExos[18].setText("Exercice 10");
+        boutonsExos[19].setText("Correction 10");
+        
+        
+    	
+
 		//--------------------------------------------------------------\\
 						//Individual exercise display\\
 		VBox exos = new VBox(5);
@@ -352,6 +337,7 @@ public class ExerciseSelectionPage extends Application {
 
 
 						//--Central Page Selection Screen--\\
+		
 		VBox pane11 = new VBox(9);
 		pane11.setStyle("-fx-background-color: #0E336A;");
 		pane11.setPadding(new Insets(50));
@@ -374,6 +360,7 @@ public class ExerciseSelectionPage extends Application {
 		
 		//---------------------------------------------------------------\\
 		// Stage & Scene + scrollbar
+		
 		root.setLeft(exercices1);
 		ScrollPane spane = new ScrollPane();
 		addHandlerToLogoButton(logoButton,root,spane);
@@ -435,6 +422,16 @@ public class ExerciseSelectionPage extends Application {
 			}
 	    });
 	}
+	
+	
+	@SuppressWarnings("unused")
+	private void addHyperlinkHandler(Hyperlink hyperlink, String url) {
+	    hyperlink.setOnAction(event -> {
+	        getHostServices().showDocument(url);
+	    });
+	}
+
+	
 	private static void addImageChangerToButton(Button button,ImageView imageViewSablier,ImageView imageViewSablierEnCours,ImageView imageViewBonhommeTriste,ImageView imageViewBonhommeNeutre,ImageView imageViewBonhommeContent) {
 	    button.setOnAction(event -> {
 	        if (button.getGraphic().equals(imageViewSablier)) {

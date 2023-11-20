@@ -45,40 +45,6 @@ public class ExercisePage extends Application{
 		Label[] labelsListeExos = new Label[8];
 		//--------------------Labels liste exos-------------------\\
 		
-		/*
-		VBox exercices1 = new VBox(10); // 10 est l'espace vertical entre les éléments
-		exercices1.setPadding(new Insets(100, 20, 150, 20));
-		exercices1.setStyle("-fx-background-color: #0E336A;");
-		
-
-		for (int i = 0; i < labelsListeExos.length; i++) {
-		    labelsListeExos[i] = new Label();
-		    labelsListeExos[i].setFont(Font.font("Verdana", 13));
-		    exercices1.getChildren().add(labelsListeExos[i]);
-		    labelsListeExos[i].setTextAlignment(TextAlignment.JUSTIFY);
-		    labelsListeExos[i].setWrapText(true);
-		    labelsListeExos[i].setPrefWidth(170);
-		}
-
-		labelsListeExos[0].setText("Sujets d'exercices :");
-		labelsListeExos[1].setText("Structure fondamentale du langage");
-		labelsListeExos[2].setText("Démarrage");
-		labelsListeExos[3].setText("Algorithme de César");
-		labelsListeExos[4].setText("Reconnaissance de mains dans un jeu de poker");
-		labelsListeExos[5].setText("Poker Fermé");
-		labelsListeExos[6].setText("Les Méthodes");
-		labelsListeExos[7].setText("Lambda");
-
-		root.setLeft(exercices1);
-
-		for (Label label : labelsListeExos) {
-		    label.setTextFill(Color.WHITE);
-		} */
-		/*
-		Line verticalLine = new Line();
-		verticalLine.setStyle("-fx-stroke: #C19233;"); // Couleur de la ligne
-		exercices1.getChildren().add(verticalLine);
-		*/ //ca marche pas 
 		
 		VBox exercices1 = new VBox(10); // 10 est l'espace vertical entre les éléments
 		exercices1.setPadding(new Insets(100, 20, 150, 20));
