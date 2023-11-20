@@ -242,7 +242,6 @@ public class ExerciseSelectionPage extends Application {
             "https://java.l3.miage.dev/langage_java/les_lambdas.html",
         };
 
-		VBox[] correctionAndLinksContainers = new VBox[10];
         
 		for (int i1 = 0; i1 < hBoxExos.length ; i1++) {
             hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
@@ -271,14 +270,12 @@ public class ExerciseSelectionPage extends Application {
             boutonsFeedback[i1].setGraphic(imageViewSablier);
             addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours, imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
 
-            correctionAndLinksContainers[i1] = new VBox();
-    		correctionAndLinksContainers[i1].getChildren().addAll(hBoxExos[i1]);
 			
 			final int finalI1 = i1;
 			Hyperlink lienURL = new Hyperlink("Voir cours");
 			lienURL.getStyleClass().add("hyperlink");  // Ajoute la classe de style
 			lienURL.setOnAction(e -> getHostServices().showDocument(liensURL[finalI1]));
-			correctionAndLinksContainers[i1].getChildren().addAll(hBoxExos[i1], lienURL);
+			
 
             for (int j = 0; j < 2; j++) {
                 int index = i1 * 2 + j;
@@ -289,8 +286,9 @@ public class ExerciseSelectionPage extends Application {
 
             hBoxExos[i1].getChildren().addAll(boutonsFeedback[i1]); 
 
-			
+			hBoxExos[i1].getChildren().add(lienURL);
         }
+		
 
         boutonsExos[0].setText("Exercice 1");
         boutonsExos[1].setText("Correction 1");
