@@ -267,6 +267,7 @@ public class ExercisePage extends Application {
 		playWhiteImageView.setFitHeight(15);
 		playWhiteButton.setGraphic(playWhiteImageView);
 
+
 		Button infoWhiteButton = new Button();
 		infoWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/i-blanc.png");
@@ -275,14 +276,14 @@ public class ExercisePage extends Application {
 		infoWhiteImageView.setFitHeight(15);
 		infoWhiteButton.setGraphic(infoWhiteImageView);
 
-		Button reduceWhiteButton = new Button();
-		reduceWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		Button reduceWhiteButton1 = new Button();
+		reduceWhiteButton1.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
-		ImageView reduceWhiteImageView=new ImageView(new Image(input));
-		reduceWhiteImageView.setFitWidth(15);
-		reduceWhiteImageView.setFitHeight(15);
-		reduceWhiteButton.setGraphic(reduceWhiteImageView);
-		EventHandler<ActionEvent> eventHandlerReduce= new EventHandler<ActionEvent>() {
+		ImageView reduceWhiteImageView1=new ImageView(new Image(input));
+		reduceWhiteImageView1.setFitWidth(15);
+		reduceWhiteImageView1.setFitHeight(15);
+		reduceWhiteButton1.setGraphic(reduceWhiteImageView1);
+		EventHandler<ActionEvent> eventHandlerReduce1= new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				double currentSize = codeArea.getFont().getSize();
 				if (currentSize >= 8) { //taille minimale est 8
@@ -290,16 +291,16 @@ public class ExercisePage extends Application {
 				}
 			}
 		};
-		reduceWhiteButton.addEventHandler(ActionEvent.ACTION,eventHandlerReduce);
+		reduceWhiteButton1.addEventHandler(ActionEvent.ACTION,eventHandlerReduce1);
 
-		Button increaseWhiteButton = new Button();
-		increaseWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		Button increaseWhiteButton1 = new Button();
+		increaseWhiteButton1.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
-		ImageView increaseWhiteImageView=new ImageView(new Image(input));
-		increaseWhiteImageView.setFitWidth(15);
-		increaseWhiteImageView.setFitHeight(15);
-		increaseWhiteButton.setGraphic(increaseWhiteImageView);
-		EventHandler<ActionEvent> eventHandlerIncrease= new EventHandler<ActionEvent>() {
+		ImageView increaseWhiteImageView1=new ImageView(new Image(input));
+		increaseWhiteImageView1.setFitWidth(15);
+		increaseWhiteImageView1.setFitHeight(15);
+		increaseWhiteButton1.setGraphic(increaseWhiteImageView1);
+		EventHandler<ActionEvent> eventHandlerIncrease1= new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				double currentSize = codeArea.getFont().getSize();
 				if (currentSize <30) { //taille max est 30
@@ -307,13 +308,86 @@ public class ExercisePage extends Application {
 				}
 			}
 		};
-		reduceWhiteButton.addEventHandler(ActionEvent.ACTION,eventHandlerReduce);
+		increaseWhiteButton1.addEventHandler(ActionEvent.ACTION,eventHandlerIncrease1);
 
-		buttonsCodeArea.getChildren().addAll(listActionsWhiteMenuBar,playWhiteButton,infoWhiteButton, reduceWhiteButton, increaseWhiteButton);
+		buttonsCodeArea.getChildren().addAll(listActionsWhiteMenuBar,playWhiteButton,infoWhiteButton, reduceWhiteButton1, increaseWhiteButton1);
 
 		codeAreaPane.getChildren().addAll(codeArea, buttonsCodeArea);
         StackPane.setAlignment(codeArea, Pos.TOP_RIGHT); //ne marche pas
+
+
+
+
+		StackPane terminalPane = new StackPane();
+		HBox buttonsTerminal = new HBox();
+		StackPane.setMargin(buttonsTerminal, new Insets(10));
+
+		Button reduceWhiteButton2 = new Button();
+		reduceWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
+		ImageView reduceWhiteImageView2=new ImageView(new Image(input));
+		reduceWhiteImageView2.setFitWidth(15);
+		reduceWhiteImageView2.setFitHeight(15);
+		reduceWhiteButton2.setGraphic(reduceWhiteImageView2);
+		EventHandler<ActionEvent> eventHandlerReduce2= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				double currentSize = terminal.getFont().getSize();
+				if (currentSize >= 8) { //taille minimale est 8
+					terminal.setStyle("-fx-font-size: " + (currentSize - 1));
+				}
+			}
+		};
+		reduceWhiteButton2.addEventHandler(ActionEvent.ACTION,eventHandlerReduce2);
+
+		Button increaseWhiteButton2 = new Button();
+		increaseWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
+		ImageView increaseWhiteImageView2=new ImageView(new Image(input));
+		increaseWhiteImageView2.setFitWidth(15);
+		increaseWhiteImageView2.setFitHeight(15);
+		increaseWhiteButton2.setGraphic(increaseWhiteImageView2);
+		EventHandler<ActionEvent> eventHandlerIncrease2= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				double currentSize = terminal.getFont().getSize();
+				if (currentSize <30) { //taille max est 30
+					terminal.setStyle("-fx-font-size: " + (currentSize + 1));
+				}
+			}
+		};
+		increaseWhiteButton2.addEventHandler(ActionEvent.ACTION,eventHandlerIncrease2);
+
+		Button closeWhiteButton = new Button();
+		closeWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		input = getClass().getResourceAsStream("/image/fermer-blanc.png");
+		ImageView closeWhiteImageView=new ImageView(new Image(input));
+		closeWhiteImageView.setFitWidth(15);
+		closeWhiteImageView.setFitHeight(15);
+		closeWhiteButton.setGraphic(closeWhiteImageView);
+
+		buttonsTerminal.getChildren().addAll(reduceWhiteButton2,increaseWhiteButton2,closeWhiteButton);
+
 		pane11.getChildren().addAll(codeAreaPane, executionSuccess, terminal);
+
+		boolean close= (Boolean) null;
+		EventHandler<ActionEvent> eventHandlerOpenTerminal= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if(!close|| close==(Boolean) null){
+					pane11.getChildren().addAll(codeAreaPane, executionSuccess,terminal);
+				}
+				close=false;
+			}
+		};
+		playWhiteButton.addEventHandler(ActionEvent.ACTION,eventHandlerOpenTerminal);
+		
+		EventHandler<ActionEvent> eventHandlerCloseTerminal= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if(close){
+					pane11.getChildren().addAll(codeAreaPane, executionSuccess);
+				}
+				close=true;
+			}
+		};
+		closeWhiteButton.addEventHandler(ActionEvent.ACTION,eventHandlerCloseTerminal);
 
 		// ---------------------------------------------------------------\\
 		// Stage & Scene
