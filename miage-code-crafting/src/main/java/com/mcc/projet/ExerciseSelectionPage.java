@@ -30,6 +30,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -109,19 +111,23 @@ public class ExerciseSelectionPage extends Application {
 		// ---------------------------------------------------------------------------
 		// ENTETE
 
-		GridPane entete = new GridPane();
+		HBox entete = new HBox();
 		entete.setStyle("-fx-background-color: #C19233;");
 		entete.setMaxWidth(Double.MAX_VALUE);
 
 		// Le Bouton Logo MiageCodeCrafting
 		Button logoButton = new Button();
+		Region headerSpring1 = new Region();
+		HBox.setHgrow(headerSpring1, Priority.ALWAYS);
+		Region headerSpring2 = new Region();
+		HBox.setHgrow(headerSpring2, Priority.ALWAYS);
 		InputStream input = getClass().getResourceAsStream("/image/logo-craft-fonce.png");
 		ImageView imageViewLogo = new ImageView(new Image(input));
 		imageViewLogo.setFitWidth(300);
 		imageViewLogo.setFitHeight(100);
 		logoButton.setGraphic(imageViewLogo);
 		logoButton.setPadding(new Insets(20, 20, 20, 20));
-		entete.add(logoButton, 0, 0);
+		entete.getChildren().addAll(logoButton, headerSpring1);
 
 		// Titre de la page (En haut au centre)
 		TextFlow titre = new TextFlow();
@@ -141,7 +147,7 @@ public class ExerciseSelectionPage extends Application {
 		universite.setFill(Color.BLACK);
 
 		titre.getChildren().addAll(poo, miage, universite);
-		entete.add(titre, 1, 0); // Utilisez la deuxième colonne
+		entete.getChildren().addAll(titre,headerSpring2); // Utilisez la deuxième colonne
 
 		// Le Bouton Connexion Discord
 	
@@ -164,19 +170,11 @@ public class ExerciseSelectionPage extends Application {
 		VBox connexion = new VBox();
 		connexion.getChildren().addAll(connexionButton, connexionText);
 
-		entete.add(connexion, 2, 0);
-
-		//entete.setHgap(100);
-		
-		GridPane corps = new GridPane();
-		entete.add(corps, 0, 1, 5, 5); // Ajoute le corps sous l'en-tête dans la grille
-
-		
+		entete.getChildren().add(connexion);
 
 		Separator ligneSeparator = new Separator();
 		ligneSeparator.setPrefWidth(Double.MAX_VALUE);
 		ligneSeparator.setStyle("-fx-background-color: #C19233;");
-		entete.add(ligneSeparator, 0, 1, 5, 1);
 
 		// -----------------------------------------------------------------
 				// Page Centrale
