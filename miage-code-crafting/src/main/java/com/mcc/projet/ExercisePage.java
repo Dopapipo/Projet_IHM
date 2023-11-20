@@ -58,7 +58,7 @@ public class ExercisePage extends Application {
 		this.numeroExo = 1;
 	}
 
-	boolean closeTerminal = false;
+	public boolean closeTerminal = true;
 
 	@Override
 	public void start(Stage arg0) throws FileNotFoundException {
@@ -227,17 +227,19 @@ public class ExercisePage extends Application {
 		TextArea codeArea = new TextArea();
 		Label executionSuccess = new Label();
 		TextArea terminal = new TextArea();
-		String terminalStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
-		String codeAreaStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white; ";
+		//String terminalStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
+		//String codeAreaStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white; ";
 
-		terminal.setStyle(terminalStyle);
-		codeArea.setStyle(codeAreaStyle);
+		//terminal.setStyle(terminalStyle);
+		//codeArea.setStyle(codeAreaStyle);
 		codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
 		codeArea.setPrefHeight(450);
 
 		// Création des boutons
 
 		StackPane codeAreaPane = new StackPane();
+		String codeAreaPaneStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white; ";
+		codeAreaPane.setStyle(codeAreaPaneStyle);
 		HBox buttonsCodeArea = new HBox();
 		StackPane.setMargin(buttonsCodeArea, new Insets(10));
 
@@ -293,7 +295,7 @@ public class ExercisePage extends Application {
 
 		Button increaseWhiteButton1 = new Button();
 		increaseWhiteButton1.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
-		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
+		input = getClass().getResourceAsStream("/image/agrandir-lecran-blanc.png");
 		ImageView increaseWhiteImageView1 = new ImageView(new Image(input));
 		increaseWhiteImageView1.setFitWidth(15);
 		increaseWhiteImageView1.setFitHeight(15);
@@ -315,6 +317,8 @@ public class ExercisePage extends Application {
 		StackPane.setAlignment(codeArea, Pos.TOP_RIGHT); // ne marche pas
 
 		StackPane terminalPane = new StackPane();
+		String terminalPaneStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
+		terminalPane.setStyle(terminalPaneStyle);
 		HBox buttonsTerminal = new HBox();
 		StackPane.setMargin(buttonsTerminal, new Insets(10));
 
@@ -337,7 +341,7 @@ public class ExercisePage extends Application {
 
 		Button increaseWhiteButton2 = new Button();
 		increaseWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
-		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
+		input = getClass().getResourceAsStream("/image/agrandir-lecran-blanc.png");
 		ImageView increaseWhiteImageView2 = new ImageView(new Image(input));
 		increaseWhiteImageView2.setFitWidth(15);
 		increaseWhiteImageView2.setFitHeight(15);
@@ -361,24 +365,22 @@ public class ExercisePage extends Application {
 		closeWhiteButton.setGraphic(closeWhiteImageView);
 
 		buttonsTerminal.getChildren().addAll(reduceWhiteButton2, increaseWhiteButton2, closeWhiteButton);
-
-		pane11.getChildren().addAll(codeAreaPane, executionSuccess, terminal);
+		terminalPane.getChildren().addAll(terminal,buttonsTerminal);
+		pane11.getChildren().addAll(codeAreaPane, executionSuccess);
 
 		EventHandler<ActionEvent> eventHandlerOpenTerminal = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (!closeTerminal || closeTerminal == (Boolean) null) {
-					pane11.getChildren().addAll(codeAreaPane, executionSuccess, terminal);
+				if (closeTerminal) {
+					pane11.getChildren().add(terminalPane);
 				}
-				closeTerminal = false;
+				closeTerminal=false;
 			}
 		};
 		playWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerOpenTerminal);
 
 		EventHandler<ActionEvent> eventHandlerCloseTerminal = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (closeTerminal) {
-					pane11.getChildren().addAll(codeAreaPane, executionSuccess);
-				}
+				pane11.getChildren().remove(terminalPane);
 				closeTerminal = true;
 			}
 		};
