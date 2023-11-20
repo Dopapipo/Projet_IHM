@@ -228,8 +228,9 @@ public class ExerciseSelectionPage extends Application {
 
 		
         Button[] boutonsExos = new Button[20];
+		Button[] boutonsFeedback = new Button[10];
         HBox[] hBoxExos = new HBox[10];
-        Button[] boutonsFeedback = new Button[hBoxExos.length];
+        
 
         String[] liensURL = {
             "https://java.l3.miage.dev/langage_java/structure_fondamentale.html",
@@ -241,7 +242,7 @@ public class ExerciseSelectionPage extends Application {
             "https://java.l3.miage.dev/langage_java/les_lambdas.html",
         };
 
-		VBox[] correctionAndLinksContainers = new VBox[hBoxExos.length];
+		VBox[] correctionAndLinksContainers = new VBox[10];
         
 		for (int i1 = 0; i1 < hBoxExos.length ; i1++) {
             hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
