@@ -34,3 +34,11 @@ Label {
 	font-family: 'Consolas';
 	-fx-font-family: 'Consolas';
 }
+.hyperlink {
+	-fx-text-fill: rgb(232, 204, 167); /* Couleur du texte du lien */
+	-fx-underline: true;   /* Soulignement du lien */
+	font-size: 16px;
+	-fx-font-size: 16px;
+	font-style: italic;
+	-fx-font-style: italic;
+}
