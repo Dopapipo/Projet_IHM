@@ -12,6 +12,8 @@ import java.io.InputStream;
  * Pas besoin des fonctionnalités pour l'instant, on s'en chargera plus tard.
  */
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -242,8 +244,8 @@ public class ExercisePage extends Application {
 		listActionsWhiteMenu.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		InputStream input = getClass().getResourceAsStream("/image/liste-blanc.png");
 		ImageView listActionsWhiteImageView=new ImageView(new Image(input));
-		listActionsWhiteImageView.setFitWidth(20);
-		listActionsWhiteImageView.setFitHeight(20);
+		listActionsWhiteImageView.setFitWidth(15);
+		listActionsWhiteImageView.setFitHeight(15);
 		listActionsWhiteMenu.setGraphic(listActionsWhiteImageView);
 		listActionsWhiteMenu.getItems().addAll(new MenuItem("Open in new Tab"),
 				new MenuItem("Open in new Tab"),
@@ -261,43 +263,53 @@ public class ExercisePage extends Application {
 		playWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/play-blanc.png");
 		ImageView playWhiteImageView=new ImageView(new Image(input));
-		playWhiteImageView.setFitWidth(20);
-		playWhiteImageView.setFitHeight(20);
+		playWhiteImageView.setFitWidth(15);
+		playWhiteImageView.setFitHeight(15);
 		playWhiteButton.setGraphic(playWhiteImageView);
 
 		Button infoWhiteButton = new Button();
 		infoWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/i-blanc.png");
 		ImageView infoWhiteImageView=new ImageView(new Image(input));
-		infoWhiteImageView.setFitWidth(20);
-		infoWhiteImageView.setFitHeight(20);
+		infoWhiteImageView.setFitWidth(15);
+		infoWhiteImageView.setFitHeight(15);
 		infoWhiteButton.setGraphic(infoWhiteImageView);
 
 		Button reduceWhiteButton = new Button();
 		reduceWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
 		ImageView reduceWhiteImageView=new ImageView(new Image(input));
-		reduceWhiteImageView.setFitWidth(20);
-		reduceWhiteImageView.setFitHeight(20);
+		reduceWhiteImageView.setFitWidth(15);
+		reduceWhiteImageView.setFitHeight(15);
 		reduceWhiteButton.setGraphic(reduceWhiteImageView);
+		EventHandler<ActionEvent> eventHandlerReduce= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				double currentSize = codeArea.getFont().getSize();
+				if (currentSize >= 8) { //taille minimale est 8
+					codeArea.setStyle("-fx-font-size: " + (currentSize - 1));
+				}
+			}
+		};
+		reduceWhiteButton.addEventHandler(ActionEvent.ACTION,eventHandlerReduce);
 
-		Button extendWhiteButton = new Button();
-		extendWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		Button increaseWhiteButton = new Button();
+		increaseWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
-		ImageView extendWhiteImageView=new ImageView(new Image(input));
-		extendWhiteImageView.setFitWidth(20);
-		extendWhiteImageView.setFitHeight(20);
-		extendWhiteButton.setGraphic(extendWhiteImageView);
+		ImageView increaseWhiteImageView=new ImageView(new Image(input));
+		increaseWhiteImageView.setFitWidth(15);
+		increaseWhiteImageView.setFitHeight(15);
+		increaseWhiteButton.setGraphic(increaseWhiteImageView);
+		EventHandler<ActionEvent> eventHandlerIncrease= new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				double currentSize = codeArea.getFont().getSize();
+				if (currentSize <30) { //taille max est 30
+					codeArea.setStyle("-fx-font-size: " + (currentSize + 1));
+				}
+			}
+		};
+		reduceWhiteButton.addEventHandler(ActionEvent.ACTION,eventHandlerReduce);
 
-
-
-
-
-
-
-
-		
-		buttonsCodeArea.getChildren().addAll(listActionsWhiteMenuBar,playWhiteButton,infoWhiteButton, reduceWhiteButton, extendWhiteButton);
+		buttonsCodeArea.getChildren().addAll(listActionsWhiteMenuBar,playWhiteButton,infoWhiteButton, reduceWhiteButton, increaseWhiteButton);
 
 		codeAreaPane.getChildren().addAll(codeArea, buttonsCodeArea);
         StackPane.setAlignment(codeArea, Pos.TOP_RIGHT); //ne marche pas
