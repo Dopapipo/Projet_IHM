@@ -285,10 +285,10 @@ public class ExerciseSelectionPage extends Application {
             }
 
             hBoxExos[i1].getChildren().addAll(boutonsFeedback[i1]); 
-
 			hBoxExos[i1].getChildren().add(lienURL);
+
+			
         }
-		
 
         boutonsExos[0].setText("Exercice 1");
         boutonsExos[1].setText("Correction 1");
