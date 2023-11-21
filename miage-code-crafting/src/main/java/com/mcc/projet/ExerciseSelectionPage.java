@@ -4,17 +4,6 @@ import javafx.scene.control.Hyperlink;
 
 import java.io.InputStream;
 
-/*
- * TODO: ->Ajouter des boutons avec les images associées dans chaque HBox (sablier...)
- * ->Ajouter des EventHandlers à tous les boutons : les boutons exo x et correction x font passer à une vue ExercisePage associée
- * ->Les boutons sablier etc... changent d'image en fonction de l'image qu'ils ont déjà dans les HBox des boutons exos
- * ->Ajouter les hyperlinks qui renvoient vers les cours associés dans les HBox dex boutons exos
- * ->Ajouter les images aux boutons de l'entête
- * ->Ajouter une ScrollBar pour l'élément central
- * ->Ajouter un bouton mode nuit
- * ->Fix le fetch des stylesheets
- * ->Fix le dimensionnement de l'entête
- */
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -124,7 +113,12 @@ public class ExerciseSelectionPage extends Application {
 		entete.setMaxWidth(Double.MAX_VALUE);
 
 		// Le Bouton Logo MiageCodeCrafting
+		VBox logoBox = new VBox();
 		Button logoButton = new Button();
+		VBox.setMargin(logoButton, new Insets(15,0,0,0));
+		logoBox.setStyle("-fx-background-color: #C19233;");
+		logoButton.setStyle("-fx-background-color: #C19233;");
+		logoBox.getChildren().addAll(logoButton);
 		Region headerSpring1 = new Region();
 		HBox.setHgrow(headerSpring1, Priority.ALWAYS);
 		Region headerSpring2 = new Region();
@@ -134,8 +128,7 @@ public class ExerciseSelectionPage extends Application {
 		imageViewLogo.setFitWidth(300);
 		imageViewLogo.setFitHeight(100);
 		logoButton.setGraphic(imageViewLogo);
-		logoButton.setPadding(new Insets(20, 20, 20, 20));
-		entete.getChildren().addAll(logoButton, headerSpring1);
+		entete.getChildren().addAll(logoBox, headerSpring1);
 
 		// Titre de la page (En haut au centre)
 		TextFlow titre = new TextFlow();
@@ -165,7 +158,7 @@ public class ExerciseSelectionPage extends Application {
 		connexionText.setTextFill(Color.BLACK);
 
 		Button connexionButton = new Button();
-
+		connexionButton.setStyle("-fx-background-color: #C19233;");
 		connexionButton.setMaxHeight(100);
 		connexionButton.setMaxWidth(100);
 
@@ -325,7 +318,7 @@ public class ExerciseSelectionPage extends Application {
 						//Individual exercise display\\
 
 		VBox exos = new VBox();
-		TextArea codeArea = pageExo(exos, numeroExo);
+		TextArea codeArea = pageExo(exos, numeroExo, root, listeExos, entete);
 		for (int i = 0; i < boutonsExos.length / 2; i++) {
 			this.addEventHandler(boutonsExos[2 * i], i + 1, root, exos, codeArea);
 			this.addEventHandler(boutonsExos[2 * i + 1], i + 1, root, exos, codeArea);
@@ -447,7 +440,7 @@ public class ExerciseSelectionPage extends Application {
 			}
 		});
 	}
-	private TextArea pageExo(VBox pane11, int numeroExo) {
+	private TextArea pageExo(VBox pane11, int numeroExo, BorderPane root, VBox exercices, HBox header) {
 		TextArea codeArea = new TextArea();
 		HBox middleBox = new HBox();
 		Label executionSuccess = new Label("");
@@ -518,10 +511,11 @@ public class ExerciseSelectionPage extends Application {
 		reduceWhiteButton1.setGraphic(reduceWhiteImageView1);
 		EventHandler<ActionEvent> eventHandlerReduce1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				double currentSize = codeArea.getFont().getSize();
-				if (currentSize >= 8) { // taille minimale est 8
-					codeArea.setStyle("-fx-font-size: " + (currentSize - 1));
-				}
+				if (!pane11.getChildren().contains(middleBox)) pane11.getChildren().add(middleBox);
+				if (!pane11.getChildren().contains(terminal)) pane11.getChildren().add(terminal);
+				if (!root.getChildren().contains(header)) root.setTop(header);
+				if (!root.getChildren().contains(exercices)) root.setLeft(exercices);
+				codeArea.setPrefHeight(450);
 			}
 		};
 		reduceWhiteButton1.addEventHandler(ActionEvent.ACTION, eventHandlerReduce1);
@@ -535,10 +529,11 @@ public class ExerciseSelectionPage extends Application {
 		increaseWhiteButton1.setGraphic(increaseWhiteImageView1);
 		EventHandler<ActionEvent> eventHandlerIncrease1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				double currentSize = codeArea.getFont().getSize();
-				if (currentSize < 30) { // taille max est 30
-					codeArea.setStyle("-fx-font-size: " + (currentSize + 1));
-				}
+				pane11.getChildren().remove(middleBox);
+				pane11.getChildren().remove(terminal);
+				root.getChildren().remove(header);
+				root.getChildren().remove(exercices);
+				codeArea.setPrefSize(root.getWidth(), root.getHeight());
 			}
 		};
 		increaseWhiteButton1.addEventHandler(ActionEvent.ACTION, eventHandlerIncrease1);
@@ -581,10 +576,7 @@ public class ExerciseSelectionPage extends Application {
 		increaseWhiteButton2.setGraphic(increaseWhiteImageView2);
 		EventHandler<ActionEvent> eventHandlerIncrease2 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				double currentSize = terminal.getFont().getSize();
-				if (currentSize < 30) { // taille max est 30
-					terminal.setStyle("-fx-font-size: " + (currentSize + 1));
-				}
+				
 			}
 		};
 		increaseWhiteButton2.addEventHandler(ActionEvent.ACTION, eventHandlerIncrease2);
@@ -612,6 +604,7 @@ public class ExerciseSelectionPage extends Application {
 				middleBox.setStyle("-fx-background-color: green;");
 				executionSuccess.setText("Execution Success!");
 				codeArea.setPrefHeight(450);
+				terminal.setText("Hello world!");
 			}
 		};
 		playWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerOpenTerminal);
@@ -621,7 +614,7 @@ public class ExerciseSelectionPage extends Application {
 				pane11.getChildren().remove(terminal);
 				pane11.getChildren().remove(middleBox);
 				codeArea.setPrefHeight(1000);
-
+				terminal.setText("");
 				}
 		};
 		closeWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerCloseTerminal);

@@ -4,13 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-/*
- * TODO: Ajouter les boutons feedback,le bouton mode nuit, tous les boutons sur la console
- * et sur la zone de code. Pour afficher les boutons sur la console et sur la zone de code, il faut
- * surement utiliser un StackPane, et empiler la textArea et les boutons, avec les boutons au dessus.
- * Ensuite, il faut mettre la bonne position pour les boutons.
- * Pas besoin des fonctionnalités pour l'instant, on s'en chargera plus tard.
- */
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
