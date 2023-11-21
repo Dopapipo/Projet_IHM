@@ -34,6 +34,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -221,15 +222,20 @@ public class ExercisePage extends Application {
 
 		// -----------------------------------------------------------------
 		// Page Centrale
-		VBox pane11 = new VBox(5);
+		VBox pane11 = new VBox();
 		TextArea codeArea = new TextArea();
-		Label executionSuccess = new Label();
+		HBox middleBox = new HBox();
+		Label executionSuccess = new Label("");
+		executionSuccess.setStyle("-fx-text-fill: black; -fx-font-size: 20px;");
+		Region springMiddle = new Region();
+		HBox.setHgrow(springMiddle, Priority.ALWAYS);
+		middleBox.getChildren().addAll(executionSuccess,springMiddle);
 		TextArea terminal = new TextArea();
-		//String terminalStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
-		//String codeAreaStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white; ";
+		String terminalStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size:15px; ";
+		String codeAreaStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white;  ";
 
-		//terminal.setStyle(terminalStyle);
-		//codeArea.setStyle(codeAreaStyle);
+		terminal.setStyle(terminalStyle);
+		codeArea.setStyle(codeAreaStyle);
 		codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
 		codeArea.setPrefHeight(450);
 
@@ -240,7 +246,7 @@ public class ExercisePage extends Application {
 		codeAreaPane.setStyle(codeAreaPaneStyle);
 		HBox buttonsCodeArea = new HBox();
 
-		StackPane.setMargin(buttonsCodeArea, new Insets(10));
+		StackPane.setMargin(buttonsCodeArea, new Insets(0));
 
 		Menu listActionsWhiteMenu = new Menu();
 		listActionsWhiteMenu.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
@@ -324,9 +330,9 @@ public class ExercisePage extends Application {
 		String terminalPaneStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
 		terminalPane.setStyle(terminalPaneStyle);
 		HBox buttonsTerminal = new HBox();
-		StackPane.setMargin(buttonsTerminal, new Insets(10));
-		buttonsTerminal.setAlignment(Pos.TOP_RIGHT);
 		buttonsTerminal.setMaxWidth(75);
+		middleBox.getChildren().add(buttonsTerminal);
+		middleBox.setAlignment(Pos.TOP_RIGHT);
 		Button reduceWhiteButton2 = new Button();
 		reduceWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
@@ -370,15 +376,17 @@ public class ExercisePage extends Application {
 		closeWhiteButton.setGraphic(closeWhiteImageView);
 
 		buttonsTerminal.getChildren().addAll(reduceWhiteButton2, increaseWhiteButton2, closeWhiteButton);
-		terminalPane.getChildren().addAll(terminal,buttonsTerminal);
-		pane11.getChildren().addAll(codeAreaPane, executionSuccess);
+		terminalPane.getChildren().addAll(terminal);
+		pane11.getChildren().addAll(codeAreaPane, middleBox,terminalPane);
 
 		EventHandler<ActionEvent> eventHandlerOpenTerminal = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (closeTerminal) {
+				if (!pane11.getChildren().contains(terminalPane)) {
 					pane11.getChildren().add(terminalPane);
 				}
 				closeTerminal=false;
+				middleBox.setStyle("-fx-background-color: green;");
+				executionSuccess.setText("Execution Success!");
 			}
 		};
 		playWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerOpenTerminal);
