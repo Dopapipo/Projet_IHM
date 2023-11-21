@@ -68,7 +68,6 @@ public class ExercisePage extends Application {
 		exercices.setPadding(new Insets(100, 20, 150, 20));
 		exercices.setStyle("-fx-background-color: #0E336A;");
 		Label[] labelsListeExos = new Label[8];
-		// <<<<<<< HEAD
 		// --------------------Labels liste exos-------------------\\
 
 		/*
@@ -117,7 +116,6 @@ public class ExercisePage extends Application {
 		exercices1.setStyle("-fx-background-color: #0E336A;");
 
 		for (int i = 0; i < labelsListeExos.length; i++) {
-			// <<<<<<< HEAD
 			labelsListeExos[i] = new Label();
 			labelsListeExos[i].setFont(Font.font("Verdana", 13));
 			exercices1.getChildren().add(labelsListeExos[i]);
@@ -261,6 +259,8 @@ public class ExercisePage extends Application {
 				new MenuItem("Request Help with this code"));
 		MenuBar listActionsWhiteMenuBar = new MenuBar();
 		listActionsWhiteMenuBar.getMenus().add(listActionsWhiteMenu);
+		listActionsWhiteMenuBar.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+
 
 		Button playWhiteButton = new Button();
 		playWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
@@ -387,6 +387,7 @@ public class ExercisePage extends Application {
 			public void handle(ActionEvent event) {
 				pane11.getChildren().remove(terminalPane);
 				closeTerminal = true;
+				terminalPane.setPrefSize(pane11.getMaxWidth(),pane11.getHeight());
 			}
 		};
 		closeWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerCloseTerminal);
