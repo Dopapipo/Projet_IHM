@@ -241,6 +241,7 @@ public class ExercisePage extends Application {
 		String codeAreaPaneStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white; ";
 		codeAreaPane.setStyle(codeAreaPaneStyle);
 		HBox buttonsCodeArea = new HBox();
+
 		StackPane.setMargin(buttonsCodeArea, new Insets(10));
 
 		Menu listActionsWhiteMenu = new Menu();
@@ -250,6 +251,7 @@ public class ExercisePage extends Application {
 		listActionsWhiteImageView.setFitWidth(15);
 		listActionsWhiteImageView.setFitHeight(15);
 		listActionsWhiteMenu.setGraphic(listActionsWhiteImageView);
+
 		listActionsWhiteMenu.getItems().addAll(new MenuItem("Open in new Tab"),
 				new MenuItem("Open in new Tab"),
 				new MenuItem("Save as new Snip"),
@@ -312,16 +314,19 @@ public class ExercisePage extends Application {
 
 		buttonsCodeArea.getChildren().addAll(listActionsWhiteMenuBar, playWhiteButton, infoWhiteButton,
 				reduceWhiteButton1, increaseWhiteButton1);
-
+		buttonsCodeArea.setSpacing(0);
 		codeAreaPane.getChildren().addAll(codeArea, buttonsCodeArea);
-		StackPane.setAlignment(codeArea, Pos.TOP_RIGHT); // ne marche pas
-
+		buttonsCodeArea.setAlignment(Pos.TOP_RIGHT);
+		buttonsCodeArea.setMaxHeight(15);
+		buttonsCodeArea.setMaxWidth(150);
+		buttonsCodeArea.setStyle("-fx-background-color:black");
 		StackPane terminalPane = new StackPane();
 		String terminalPaneStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00; ";
 		terminalPane.setStyle(terminalPaneStyle);
 		HBox buttonsTerminal = new HBox();
 		StackPane.setMargin(buttonsTerminal, new Insets(10));
-
+		buttonsTerminal.setAlignment(Pos.TOP_RIGHT);
+		buttonsTerminal.setMaxWidth(75);
 		Button reduceWhiteButton2 = new Button();
 		reduceWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
@@ -385,7 +390,8 @@ public class ExercisePage extends Application {
 			}
 		};
 		closeWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerCloseTerminal);
-
+		codeAreaPane.setAlignment(Pos.TOP_RIGHT);
+		StackPane.setAlignment(buttonsCodeArea, Pos.TOP_RIGHT);
 		// ---------------------------------------------------------------\\
 		// Stage & Scene
 		root.setLeft(exercices1);
