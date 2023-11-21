@@ -349,14 +349,16 @@ public class ExerciseSelectionPage extends Application {
 		addSeparatorLine(pane11);
 		pane11.getChildren().addAll(sousTitre7, hBoxExos[8], hBoxExos[9]);
 		addSeparatorLine(pane11);
-
+		
 		// ---------------------------------------------------------------\\
 		// Stage & Scene + scrollbar
 		
 
 		root.setLeft(listeExos);
 
-		ScrollPane spane = new ScrollPane();
+		ScrollPane spane = new ScrollPane() {
+			public void requestFocus() {}
+		};
 		addHandlerToLogoButton(logoButton, root, spane);
 		spane.setContent(pane11);
 		spane.setFitToWidth(true);
