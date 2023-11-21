@@ -561,7 +561,7 @@ public class ExerciseSelectionPage extends Application {
 			public void handle(ActionEvent event) {
 				double currentSize = terminal.getFont().getSize();
 				if (currentSize >= 8) { // taille minimale est 8
-					terminal.setStyle("-fx-font-size: " + (currentSize - 1));
+					terminal.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" + "-fx-font-size: " + (currentSize - 1) +"px");
 				}
 			}
 		};
@@ -576,7 +576,10 @@ public class ExerciseSelectionPage extends Application {
 		increaseWhiteButton2.setGraphic(increaseWhiteImageView2);
 		EventHandler<ActionEvent> eventHandlerIncrease2 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				
+				double currentSize = terminal.getFont().getSize();
+				if (currentSize < 30) { // taille max est 30
+					terminal.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" + "-fx-font-size: " + (currentSize +1) +"px");
+				}
 			}
 		};
 		increaseWhiteButton2.addEventHandler(ActionEvent.ACTION, eventHandlerIncrease2);
