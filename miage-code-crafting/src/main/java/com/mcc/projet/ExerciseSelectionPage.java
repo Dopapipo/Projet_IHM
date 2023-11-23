@@ -338,6 +338,7 @@ public class ExerciseSelectionPage extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
+		codeArea.setPrefHeight(root.getHeight()*0.7);
 	}
 
 	private static void addSeparatorLine(VBox container) {
