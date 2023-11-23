@@ -5,13 +5,12 @@ import javafx.scene.control.Hyperlink;
 import java.io.InputStream;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -37,17 +36,6 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 public class ExerciseSelectionPage extends Application {
-	int numeroExo;
-
-	public ExerciseSelectionPage(int numeroExo) {
-		super();
-		this.numeroExo = numeroExo;
-	}
-
-	public ExerciseSelectionPage() {
-		super();
-		this.numeroExo = 1;
-	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -256,7 +244,7 @@ public class ExerciseSelectionPage extends Application {
 			imageViewBonhommeContent.setFitWidth(20);
 			imageViewBonhommeContent.setFitHeight(20);
 			boutonsFeedback[i1].setGraphic(imageViewSablier);
-			addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours,
+			Controller.addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours,
 					imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
 
 			final int finalI1 = i1;
@@ -288,10 +276,10 @@ public class ExerciseSelectionPage extends Application {
 		// Clic Exercice précis -> Page de l'exercice \\
 
 		VBox exos = new VBox();
-		TextArea codeArea = pageExo(exos, numeroExo, root, listeExos, entete);
+		TextArea codeArea = pageExo(exos, root, listeExos, entete);
 		for (int i = 0; i < boutonsExos.length / 2; i++) {
-			this.addEventHandler(boutonsExos[2 * i], i + 1, root, exos, codeArea);
-			this.addEventHandler(boutonsExos[2 * i + 1], i + 1, root, exos, codeArea);
+			Controller.addEventHandler(boutonsExos[2 * i], i + 1, root, exos, codeArea);
+			Controller.addEventHandler(boutonsExos[2 * i + 1], i + 1, root, exos, codeArea);
 		}
 
 		// --Central Page Selection Screen--\\
@@ -324,13 +312,13 @@ public class ExerciseSelectionPage extends Application {
 			}
 		};
 
-		addHandlerToLogoButton(logoButton, root, spane);
+		Controller.addHandlerToLogoButton(logoButton, root, spane);
 		spane.setContent(listeLiensExos);
 		spane.setFitToWidth(true);
 		spane.setFitToHeight(true);
 		root.setCenter(spane);
 		root.setTop(entete);
-		addPopupToButton(connexionButton);
+		Controller.addPopupToButton(connexionButton);
 
 		String cssFile = getClass().getResource("Application.css").toExternalForm();
 		Scene scene = new Scene(root, 1000, 800);
@@ -338,7 +326,6 @@ public class ExerciseSelectionPage extends Application {
 
 		primaryStage.setScene(scene);
 		primaryStage.show();
-		codeArea.setPrefHeight(root.getHeight()*0.7);
 	}
 
 	private static void addSeparatorLine(VBox container) {
@@ -349,69 +336,12 @@ public class ExerciseSelectionPage extends Application {
 		container.getChildren().add(separator);
 	}
 
-	private void addEventHandler(Button button, int numeroExo, BorderPane root, VBox exos, TextArea codeArea) {
-		button.setOnAction(event -> {
-			try {
-				this.numeroExo = numeroExo;
-				codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
-
-				root.setCenter(exos);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-
-	private void addHandlerToLogoButton(Button logoButton, BorderPane root, ScrollPane pane) {
-		logoButton.setOnAction(event -> {
-			try {
-				root.setCenter(pane);
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		});
-	}
-
-	private static void addPopupToButton(Button button) {
-		button.setOnAction(event -> {
-			ConnexionScreen popup = new ConnexionScreen();
-			try {
-				popup.start(new Stage());
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
-	}
-
-	private static void addImageChangerToButton(Button button, ImageView imageViewSablier,
-			ImageView imageViewSablierEnCours, ImageView imageViewBonhommeTriste, ImageView imageViewBonhommeNeutre,
-			ImageView imageViewBonhommeContent) {
-		button.setOnAction(event -> {
-			if (button.getGraphic().equals(imageViewSablier)) {
-				button.setGraphic(imageViewSablierEnCours);
-			} else if (button.getGraphic().equals(imageViewSablierEnCours)) {
-				button.setGraphic(imageViewBonhommeTriste);
-			} else if (button.getGraphic().equals(imageViewBonhommeTriste)) {
-				button.setGraphic(imageViewBonhommeNeutre);
-				;
-			} else if (button.getGraphic().equals(imageViewBonhommeNeutre)) {
-				button.setGraphic(imageViewBonhommeContent);
-				;
-			} else if (button.getGraphic().equals(imageViewBonhommeContent)) {
-				button.setGraphic(imageViewSablier);
-				;
-			}
-		});
-	}
-
-	private TextArea pageExo(VBox pane11, int numeroExo, BorderPane root, VBox exercices, HBox header) {
+	private TextArea pageExo(VBox pane11, BorderPane root, VBox exercices, HBox header) {
 		TextArea codeArea = new TextArea();
 		HBox middleBox = new HBox();
 		Label executionSuccess = new Label();
 		executionSuccess.setStyle("-fx-text-fill: black; -fx-font-size: 20px;");
+		// Ce spring sert à bien mettre les boutons liés à la console tout à droite
 		Region springMiddle = new Region();
 		HBox.setHgrow(springMiddle, Priority.ALWAYS);
 		middleBox.getChildren().addAll(executionSuccess, springMiddle);
@@ -421,8 +351,7 @@ public class ExerciseSelectionPage extends Application {
 
 		terminal.setStyle(terminalStyle);
 		codeArea.setStyle(codeAreaStyle);
-		codeArea.setText(ExerciseCodeContainer.lireExercice(this.numeroExo));
-		codeArea.setPrefHeight(450);
+		codeArea.setPrefHeight(600);
 
 		// Création des boutons
 
@@ -434,7 +363,8 @@ public class ExerciseSelectionPage extends Application {
 		StackPane.setMargin(buttonsCodeArea, new Insets(0));
 
 		Menu listActionsWhiteMenu = new Menu();
-		listActionsWhiteMenu.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
+		// un menu n'a pas d'héritage commun avec un bouton malheureusement
+		// donc on va devoir l'initialiser à la main
 		InputStream input = getClass().getResourceAsStream("/image/liste-blanc.png");
 		ImageView listActionsWhiteImageView = new ImageView(new Image(input));
 		listActionsWhiteImageView.setFitWidth(15);
@@ -452,155 +382,75 @@ public class ExerciseSelectionPage extends Application {
 		listActionsWhiteMenuBar.getMenus().add(listActionsWhiteMenu);
 		listActionsWhiteMenuBar.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 
+		String style = "-fx-background-color: #000; -fx-text-fill: white;";
 		Button playWhiteButton = new Button();
-		playWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/play-blanc.png");
-		ImageView playWhiteImageView = new ImageView(new Image(input));
-		playWhiteImageView.setFitWidth(15);
-		playWhiteImageView.setFitHeight(15);
-		playWhiteButton.setGraphic(playWhiteImageView);
-
+		initializeImageToNode(input, playWhiteButton, style);
 		Button infoWhiteButton = new Button();
-		infoWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/i-blanc.png");
-		ImageView infoWhiteImageView = new ImageView(new Image(input));
-		infoWhiteImageView.setFitWidth(15);
-		infoWhiteImageView.setFitHeight(15);
-		infoWhiteButton.setGraphic(infoWhiteImageView);
-
+		initializeImageToNode(input, infoWhiteButton, style);
 		Button reduceWhiteButton1 = new Button();
-		reduceWhiteButton1.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
-		ImageView reduceWhiteImageView1 = new ImageView(new Image(input));
-		reduceWhiteImageView1.setFitWidth(15);
-		reduceWhiteImageView1.setFitHeight(15);
-		reduceWhiteButton1.setGraphic(reduceWhiteImageView1);
-		EventHandler<ActionEvent> eventHandlerReduce1 = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				if (!pane11.getChildren().contains(middleBox))
-					pane11.getChildren().add(middleBox);
-				if (!pane11.getChildren().contains(terminal))
-					pane11.getChildren().add(terminal);
-				if (!root.getChildren().contains(header))
-					root.setTop(header);
-				if (!root.getChildren().contains(exercices))
-					root.setLeft(exercices);
-				codeArea.setPrefHeight(450);
-			}
-		};
-		reduceWhiteButton1.addEventHandler(ActionEvent.ACTION, eventHandlerReduce1);
+		initializeImageToNode(input, reduceWhiteButton1, style);
+		Controller.addQuitFullscreenHandler(reduceWhiteButton1, pane11, middleBox, terminal, codeArea, root, header,
+				exercices);
 
 		Button increaseWhiteButton1 = new Button();
-		increaseWhiteButton1.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/agrandir-lecran-blanc.png");
-		ImageView increaseWhiteImageView1 = new ImageView(new Image(input));
-		increaseWhiteImageView1.setFitWidth(15);
-		increaseWhiteImageView1.setFitHeight(15);
-		increaseWhiteButton1.setGraphic(increaseWhiteImageView1);
-		EventHandler<ActionEvent> eventHandlerIncrease1 = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				pane11.getChildren().remove(middleBox);
-				pane11.getChildren().remove(terminal);
-				root.getChildren().remove(header);
-				root.getChildren().remove(exercices);
-				codeArea.setPrefSize(root.getWidth(), root.getHeight());
-			}
-		};
-		increaseWhiteButton1.addEventHandler(ActionEvent.ACTION, eventHandlerIncrease1);
+		initializeImageToNode(input, increaseWhiteButton1, style);
+		Controller.addFullscreenHandler(increaseWhiteButton1, pane11, middleBox, terminal, codeArea, root, header,
+				exercices);
 
 		buttonsCodeArea.getChildren().addAll(listActionsWhiteMenuBar, playWhiteButton, infoWhiteButton,
 				reduceWhiteButton1, increaseWhiteButton1);
+		// Pour que la fenêtre de code puisse être clickable, il faut
+		// bien redimensionner buttonsCodeArea.
 		buttonsCodeArea.setSpacing(0);
 		codeAreaPane.getChildren().addAll(codeArea, buttonsCodeArea);
 		buttonsCodeArea.setAlignment(Pos.TOP_RIGHT);
 		buttonsCodeArea.setMaxHeight(15);
 		buttonsCodeArea.setMaxWidth(150);
 		buttonsCodeArea.setStyle("-fx-background-color:black");
+
 		HBox buttonsTerminal = new HBox();
 		buttonsTerminal.setMaxWidth(75);
 		middleBox.getChildren().add(buttonsTerminal);
 		middleBox.setAlignment(Pos.TOP_RIGHT);
+		// On initialise tous les boutons associés au terminal
+		// Avec leurs images et leurs handlers
 		Button reduceWhiteButton2 = new Button();
-		reduceWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
-		ImageView reduceWhiteImageView2 = new ImageView(new Image(input));
-		reduceWhiteImageView2.setFitWidth(15);
-		reduceWhiteImageView2.setFitHeight(15);
-		reduceWhiteButton2.setGraphic(reduceWhiteImageView2);
-		EventHandler<ActionEvent> eventHandlerReduce2 = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				double currentSize = terminal.getFont().getSize();
-				if (currentSize >= 8) { // taille minimale est 8
-					terminal.setStyle(
-							"-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;"
-									+ "-fx-font-size: " + (currentSize - 1) + "px");
-				}
-			}
-		};
-		reduceWhiteButton2.addEventHandler(ActionEvent.ACTION, eventHandlerReduce2);
-
+		initializeImageToNode(input, reduceWhiteButton2, style);
+		Controller.addReduceFontTerminalHandler(reduceWhiteButton2, terminal);
 		Button increaseWhiteButton2 = new Button();
-		increaseWhiteButton2.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/agrandir-lecran-blanc.png");
-		ImageView increaseWhiteImageView2 = new ImageView(new Image(input));
-		increaseWhiteImageView2.setFitWidth(15);
-		increaseWhiteImageView2.setFitHeight(15);
-		increaseWhiteButton2.setGraphic(increaseWhiteImageView2);
-		EventHandler<ActionEvent> eventHandlerIncrease2 = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				double currentSize = terminal.getFont().getSize();
-				if (currentSize < 30) { // taille max est 30
-					terminal.setStyle(
-							"-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;"
-									+ "-fx-font-size: " + (currentSize + 1) + "px");
-				}
-			}
-		};
-		increaseWhiteButton2.addEventHandler(ActionEvent.ACTION, eventHandlerIncrease2);
+		initializeImageToNode(input, increaseWhiteButton2, style);
+		Button closeWhiteButton = new Button();
+		input = getClass().getResourceAsStream("/image/fermer-blanc.png");
+		initializeImageToNode(input, closeWhiteButton, style);
 		terminal.setPrefHeight(250);
 		terminal.setMaxHeight(Double.MAX_VALUE);
 		codeArea.setMaxHeight(Double.MAX_VALUE);
-		Button closeWhiteButton = new Button();
-		closeWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
-		input = getClass().getResourceAsStream("/image/fermer-blanc.png");
-		ImageView closeWhiteImageView = new ImageView(new Image(input));
-		closeWhiteImageView.setFitWidth(15);
-		closeWhiteImageView.setFitHeight(15);
-		closeWhiteButton.setGraphic(closeWhiteImageView);
+		codeAreaPane.setAlignment(Pos.TOP_RIGHT);
 		buttonsTerminal.getChildren().addAll(reduceWhiteButton2, increaseWhiteButton2, closeWhiteButton);
 		pane11.getChildren().addAll(codeAreaPane, middleBox, terminal);
-
-		EventHandler<ActionEvent> eventHandlerOpenTerminal = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				if (!pane11.getChildren().contains(middleBox)) {
-					pane11.getChildren().add(middleBox);
-				}
-				if (!pane11.getChildren().contains(terminal)) {
-					pane11.getChildren().add(terminal);
-				}
-				middleBox.setStyle("-fx-background-color: green;");
-				executionSuccess.setText("Execution Success!");
-				codeArea.setPrefHeight(450);
-				terminal.setText("Hello world!");
-			}
-		};
-		playWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerOpenTerminal);
-
-		EventHandler<ActionEvent> eventHandlerCloseTerminal = new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				pane11.getChildren().remove(terminal);
-				pane11.getChildren().remove(middleBox);
-				codeArea.setPrefHeight(1000);
-				terminal.setText("");
-			}
-		};
-		closeWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerCloseTerminal);
-		codeAreaPane.setAlignment(Pos.TOP_RIGHT);
 		StackPane.setAlignment(buttonsCodeArea, Pos.TOP_RIGHT);
+		// On ajoute tous les handlers nécéssaires au fonctionnement de la page
+		Controller.addIncreaseFontTerminalHandler(increaseWhiteButton2, terminal);
+		Controller.addExecuteHandler(playWhiteButton, codeArea, terminal, pane11, middleBox, executionSuccess);
+		Controller.addCloseTerminalHandler(closeWhiteButton, codeArea, terminal, pane11, middleBox);
 		return codeArea;
 	}
 
 	public static void main(String... args) {
 		launch(args);
+	}
+
+	public static void initializeImageToNode(InputStream input, Labeled node, String style) {
+		node.setStyle(style);
+		ImageView view = new ImageView(new Image(input));
+		view.setFitWidth(15);
+		view.setFitHeight(15);
+		node.setGraphic(view);
 	}
 }

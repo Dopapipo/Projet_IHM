@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 
-public class ExerciseCodeContainer {
+public class Model {
 
     public static String lireExercice(int numeroExo) {
         String cheminFichier = "miage-code-crafting\\src\\main\\resources\\textesExos\\Exercice" + numeroExo + ".txt";
