@@ -34,6 +34,20 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+//Difficultés : ajuster le header pour avoir des boutons bien placés à gauche et à droite
+//Pour ça, on a utilisé des Spring, qui sont des régions qui prennent toute la place disponible
+//et qui permettent de bien placer les boutons à gauche et à droite.
+//On a eu un peu de mal à mettre les images dans les boutons de manière propre
+//Mais on a finalement réussi à trouver une fitWidth et une fitHeight qui marche bien
+//Au début, on voulait utiliser deux fenêtres, mais la navigation semblait plus
+//fluide en une seule fenêtre. Pour ça, on joue avec les setCenter et setLeft de BorderPane
+//On enlève des éléments pour le plein écran du codeArea, et on les remet quand on quitte le plein écran
+//On a eu du mal à trouver comment faire pour que le codeArea soit bien cliquable lorsqu'il est dans
+//une stackpane, mais on a finalement trouvé une solution en redimensionnant la HBox qui contient
+//les boutons sur le codeArea pour qu'elle ne prenne pas le focus.
+//Il y avait également un bug étrange qui faisait que le ScrollPane prenait le focus et dérangeait
+//Tous nos Labels sur la page de séléction des exercices, et pour cela il a fallu override la méthode
+//requestFocus() de notre instance de ScrollPane pour qu'elle ne fasse rien.
 
 public class ExerciseSelectionPage extends Application {
 
@@ -44,7 +58,6 @@ public class ExerciseSelectionPage extends Application {
 		InputStream linkLogo = getClass().getResourceAsStream("/image/sorbonne.png");
 		primaryStage.getIcons().add(new Image(linkLogo));
 		primaryStage.setMaximized(true);
-		primaryStage.setResizable(false);
 
 		BorderPane root = new BorderPane();
 
@@ -59,7 +72,6 @@ public class ExerciseSelectionPage extends Application {
 
 		for (int i = 0; i < labelsListeExos.length; i++) {
 			labelsListeExos[i] = new Label();
-			labelsListeExos[i].setFont(Font.font("Verdana", 13));
 			listeExos.getChildren().add(labelsListeExos[i]);
 
 			if (i < labelsListeExos.length - 1) {
@@ -250,6 +262,9 @@ public class ExerciseSelectionPage extends Application {
 			final int finalI1 = i1;
 			Hyperlink lienURL = new Hyperlink("Voir le cours");
 			lienURL.getStyleClass().add("hyperlink");
+			// si on n'extends pas Application, on ne peut pas utiliser getHostServices()
+			// et c'est plutôt compliqué et longde faire un workaround, même si ça reste
+			// faisable, donc cette classe restera une Application et non pas une Vue
 			lienURL.setOnAction(e -> getHostServices().showDocument(liensURL[finalI1]));
 
 			for (int j = 0; j < 2; j++) { // Ajouter à la HBox [i1] les boutons Exo et Correction associés
