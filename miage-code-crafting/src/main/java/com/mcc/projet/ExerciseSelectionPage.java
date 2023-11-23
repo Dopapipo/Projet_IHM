@@ -1,6 +1,6 @@
 package com.mcc.projet;
+
 import javafx.scene.control.Hyperlink;
-//import javafx.scene.layout.StackPane;
 
 import java.io.InputStream;
 
@@ -9,14 +9,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-//import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-//import javafx.scene.control.ScrollBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Separator;
 import javafx.scene.control.SeparatorMenuItem;
@@ -24,7 +22,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
@@ -37,7 +34,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
-//import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 public class ExerciseSelectionPage extends Application {
@@ -56,6 +52,9 @@ public class ExerciseSelectionPage extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
+		primaryStage.setTitle("MIAGE CODE CRAFTING");
+		InputStream linkLogo = getClass().getResourceAsStream("/image/sorbonne.png");
+		primaryStage.getIcons().add(new Image(linkLogo));
 		primaryStage.setMaximized(true);
 		primaryStage.setResizable(false);
 
@@ -63,10 +62,6 @@ public class ExerciseSelectionPage extends Application {
 
 		// -----------------------------------------------------------------------------
 		// Liste d'exercices à gauche
-
-		VBox exercices = new VBox(30);
-		exercices.setPadding(new Insets(100, 20, 150, 20));
-		exercices.setStyle("-fx-background-color: #0E336A;");
 
 		Label[] labelsListeExos = new Label[8];
 
@@ -84,7 +79,7 @@ public class ExerciseSelectionPage extends Application {
 				separator.setPadding(new Insets(5, 0, 5, 0));
 				listeExos.getChildren().add(separator);
 			}
-
+			labelsListeExos[i].setTextFill(Color.WHITE);
 			labelsListeExos[i].setTextAlignment(TextAlignment.JUSTIFY);
 			labelsListeExos[i].setWrapText(true);
 			labelsListeExos[i].setPrefWidth(170);
@@ -101,10 +96,6 @@ public class ExerciseSelectionPage extends Application {
 
 		root.setLeft(listeExos);
 
-		for (Label label : labelsListeExos) {
-			label.setTextFill(Color.WHITE);
-		}
-
 		// ---------------------------------------------------------------------------
 		// ENTETE
 
@@ -112,17 +103,21 @@ public class ExerciseSelectionPage extends Application {
 		entete.setStyle("-fx-background-color: #C19233;");
 		entete.setMaxWidth(Double.MAX_VALUE);
 
-		// Le Bouton Logo MiageCodeCrafting
-		VBox logoBox = new VBox();
-		Button logoButton = new Button();
-		VBox.setMargin(logoButton, new Insets(15,0,0,0));
-		logoBox.setStyle("-fx-background-color: #C19233;");
-		logoButton.setStyle("-fx-background-color: #C19233;");
-		logoBox.getChildren().addAll(logoButton);
+		// Les Spring servent à bien agencer l'entête.
 		Region headerSpring1 = new Region();
 		HBox.setHgrow(headerSpring1, Priority.ALWAYS);
 		Region headerSpring2 = new Region();
 		HBox.setHgrow(headerSpring2, Priority.ALWAYS);
+
+		// Le Bouton Logo MiageCodeCrafting
+		VBox logoBox = new VBox();
+		logoBox.setStyle("-fx-background-color: #C19233;");
+		Button logoButton = new Button();
+		VBox.setMargin(logoButton, new Insets(15, 0, 0, 0));
+		logoButton.setStyle("-fx-background-color: #C19233;");
+
+		logoBox.getChildren().addAll(logoButton);
+
 		InputStream input = getClass().getResourceAsStream("/image/logo-craft-fonce.png");
 		ImageView imageViewLogo = new ImageView(new Image(input));
 		imageViewLogo.setFitWidth(300);
@@ -148,10 +143,9 @@ public class ExerciseSelectionPage extends Application {
 		universite.setFill(Color.BLACK);
 
 		titre.getChildren().addAll(poo, miage, universite);
-		entete.getChildren().addAll(titre,headerSpring2); // Utilisez la deuxième colonne
+		entete.getChildren().addAll(titre, headerSpring2);
 
 		// Le Bouton Connexion Discord
-	
 		Label connexionText = new Label("Connexion");
 		connexionText.setTextAlignment(TextAlignment.CENTER);
 		connexionText.setFont(Font.font("Arial Narrow", FontWeight.NORMAL, 20));
@@ -173,12 +167,8 @@ public class ExerciseSelectionPage extends Application {
 
 		entete.getChildren().add(connexion);
 
-		Separator ligneSeparator = new Separator();
-		ligneSeparator.setPrefWidth(Double.MAX_VALUE);
-		ligneSeparator.setStyle("-fx-background-color: #C19233;");
-
 		// -----------------------------------------------------------------
-				// Page Centrale
+		// Page Centrale
 
 		Label titrePage = new Label("Exercices d'application");
 		Label sousTitre1 = new Label("STRUCTURE FONDAMENTALE DU LANGAGE");
@@ -222,100 +212,80 @@ public class ExerciseSelectionPage extends Application {
 		sousTitre5.setTextFill(Color.WHITE);
 		sousTitre6.setTextFill(Color.WHITE);
 		sousTitre7.setTextFill(Color.WHITE);
-		
-		//------------Boutons------------\\
 
-		
-        Button[] boutonsExos = new Button[20];
-        HBox[] hBoxExos = new HBox[10];
-        Button[] boutonsFeedback = new Button[hBoxExos.length];
+		// ------------Boutons------------\\
 
-        String[] liensURL = {
-            "https://java.l3.miage.dev/langage_java/structure_fondamentale.html",
-            "https://java.l3.miage.dev/langage_java/premiere_classe.html",
-            "https://java.l3.miage.dev/langage_java/premiere_classe.html",
-            "https://java.l3.miage.dev/langage_java/types_primitifs.html",
-			"https://java.l3.miage.dev/langage_java/structures_de_controle.html",
-            "https://java.l3.miage.dev/index.html",
-            "https://java.l3.miage.dev/index.html",
-			"https://java.l3.miage.dev/langage_java/generiques.html",
-            "https://java.l3.miage.dev/langage_java/les_lambdas.html",
-			"https://java.l3.miage.dev/langage_java/les_lambdas.html"
-        };
+		Button[] boutonsExos = new Button[20];
+		HBox[] hBoxExos = new HBox[10];
+		Button[] boutonsFeedback = new Button[hBoxExos.length];
 
-        
-		for (int i1 = 0; i1 < hBoxExos.length ; i1++) {
-            hBoxExos[i1] = new HBox(); // ligne pour initialiser les HBox
-            hBoxExos[i1].setSpacing(10);
-            boutonsFeedback[i1] = new Button();
-            input = getClass().getResourceAsStream("/image/sablier-1-noir.png");
-            ImageView imageViewSablier = new ImageView(new Image(input));
-            input = getClass().getResourceAsStream("/image/sablier-2-noir.png");
-            ImageView imageViewSablierEnCours = new ImageView(new Image(input));
-            input = getClass().getResourceAsStream("/image/emoticone-neutre-noir.png");
-            ImageView imageViewBonhommeNeutre = new ImageView(new Image(input));
-            input = getClass().getResourceAsStream("/image/emoticone-triste-noir.png");
-            ImageView imageViewBonhommeTriste = new ImageView(new Image(input));
-            input = getClass().getResourceAsStream("/image/emoticone-joyeux-noir.png");
-            ImageView imageViewBonhommeContent = new ImageView(new Image(input));
-            imageViewSablier.setFitWidth(20);
-            imageViewSablier.setFitHeight(20);
-            imageViewSablierEnCours.setFitWidth(20);
-            imageViewSablierEnCours.setFitHeight(20);
-            imageViewBonhommeNeutre.setFitWidth(20);
-            imageViewBonhommeNeutre.setFitHeight(20);
-            imageViewBonhommeTriste.setFitWidth(20);
-            imageViewBonhommeTriste.setFitHeight(20);
-            imageViewBonhommeContent.setFitWidth(20);
-            imageViewBonhommeContent.setFitHeight(20);
-            boutonsFeedback[i1].setGraphic(imageViewSablier);
-            addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours, imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
+		String[] liensURL = {
+				"https://java.l3.miage.dev/langage_java/structure_fondamentale.html",
+				"https://java.l3.miage.dev/langage_java/premiere_classe.html",
+				"https://java.l3.miage.dev/langage_java/premiere_classe.html",
+				"https://java.l3.miage.dev/langage_java/types_primitifs.html",
+				"https://java.l3.miage.dev/langage_java/structures_de_controle.html",
+				"https://java.l3.miage.dev/index.html",
+				"https://java.l3.miage.dev/index.html",
+				"https://java.l3.miage.dev/langage_java/generiques.html",
+				"https://java.l3.miage.dev/langage_java/les_lambdas.html",
+				"https://java.l3.miage.dev/langage_java/les_lambdas.html"
+		};
 
-			
+		for (int i1 = 0; i1 < hBoxExos.length; i1++) {
+			hBoxExos[i1] = new HBox(10);
+			boutonsFeedback[i1] = new Button();
+			input = getClass().getResourceAsStream("/image/sablier-1-noir.png");
+			ImageView imageViewSablier = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/sablier-2-noir.png");
+			ImageView imageViewSablierEnCours = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/emoticone-neutre-noir.png");
+			ImageView imageViewBonhommeNeutre = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/emoticone-triste-noir.png");
+			ImageView imageViewBonhommeTriste = new ImageView(new Image(input));
+			input = getClass().getResourceAsStream("/image/emoticone-joyeux-noir.png");
+			ImageView imageViewBonhommeContent = new ImageView(new Image(input));
+			imageViewSablier.setFitWidth(20);
+			imageViewSablier.setFitHeight(20);
+			imageViewSablierEnCours.setFitWidth(20);
+			imageViewSablierEnCours.setFitHeight(20);
+			imageViewBonhommeNeutre.setFitWidth(20);
+			imageViewBonhommeNeutre.setFitHeight(20);
+			imageViewBonhommeTriste.setFitWidth(20);
+			imageViewBonhommeTriste.setFitHeight(20);
+			imageViewBonhommeContent.setFitWidth(20);
+			imageViewBonhommeContent.setFitHeight(20);
+			boutonsFeedback[i1].setGraphic(imageViewSablier);
+			addImageChangerToButton(boutonsFeedback[i1], imageViewSablier, imageViewSablierEnCours,
+					imageViewBonhommeTriste, imageViewBonhommeNeutre, imageViewBonhommeContent);
+
 			final int finalI1 = i1;
 			Hyperlink lienURL = new Hyperlink("Voir le cours");
-			lienURL.getStyleClass().add("hyperlink");  // Ajoute la classe de style
+			lienURL.getStyleClass().add("hyperlink");
 			lienURL.setOnAction(e -> getHostServices().showDocument(liensURL[finalI1]));
 
-            for (int j = 0; j < 2; j++) {
-                int index = i1 * 2 + j;
-                boutonsExos[index] = new Button();
-                boutonsExos[index].setPrefSize(120, 30);
-                hBoxExos[i1].getChildren().add(boutonsExos[index]);
-            }
+			for (int j = 0; j < 2; j++) { // Ajouter à la HBox [i1] les boutons Exo et Correction associés
+				int index = i1 * 2 + j;
+				boutonsExos[index] = new Button();
+				boutonsExos[index].setPrefSize(120, 30);
+				hBoxExos[i1].getChildren().add(boutonsExos[index]);
+			}
 
-            hBoxExos[i1].getChildren().addAll(boutonsFeedback[i1]); 
+			hBoxExos[i1].getChildren().addAll(boutonsFeedback[i1]);
 			hBoxExos[i1].getChildren().addAll(lienURL);
 
-			
-        }
+		}
 
-        boutonsExos[0].setText("Exercice 1");
-        boutonsExos[1].setText("Correction 1");
-        boutonsExos[2].setText("Exercice 2");
-        boutonsExos[3].setText("Correction 2");
-        boutonsExos[4].setText("Exercice 3");
-        boutonsExos[5].setText("Correction 3");
-        boutonsExos[6].setText("Exercice 4");
-        boutonsExos[7].setText("Correction 4");
-        boutonsExos[8].setText("Exercice 5");
-        boutonsExos[9].setText("Correction 5");
-        boutonsExos[10].setText("Exercice 6");
-        boutonsExos[11].setText("Correction 6");
-        boutonsExos[12].setText("Exercice 7");
-        boutonsExos[13].setText("Correction 7");
-        boutonsExos[14].setText("Exercice 8");
-        boutonsExos[15].setText("Correction 8");
-        boutonsExos[16].setText("Exercice 9");
-        boutonsExos[17].setText("Correction 9");
-        boutonsExos[18].setText("Exercice 10");
-        boutonsExos[19].setText("Correction 10");
-        
-        
-    	
+		for (int i = 0; i < boutonsExos.length; i++) {
+			if (i % 2 == 0) {
+				boutonsExos[i].setText("Exercice " + (i / 2 + 1));
+			} else {
+				boutonsExos[i].setText("Correction " + (i / 2 + 1));
+			}
+		}
 
-		//--------------------------------------------------------------\\
-						//Individual exercise display\\
+		// --------------------------------------------------------------\\
+		// Clic Exercice précis -> Page de l'exercice \\
 
 		VBox exos = new VBox();
 		TextArea codeArea = pageExo(exos, numeroExo, root, listeExos, entete);
@@ -323,52 +293,49 @@ public class ExerciseSelectionPage extends Application {
 			this.addEventHandler(boutonsExos[2 * i], i + 1, root, exos, codeArea);
 			this.addEventHandler(boutonsExos[2 * i + 1], i + 1, root, exos, codeArea);
 		}
-		for (Button bouton : boutonsExos) {
-			bouton.setTextFill(Color.web("#F4E1B9"));
-		}
-
 
 		// --Central Page Selection Screen--\\
 
-		VBox pane11 = new VBox(9);
-		pane11.setStyle("-fx-background-color: #0E336A;");
-		pane11.setPadding(new Insets(50));
-		pane11.getChildren().addAll(titrePage);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre1, hBoxExos[0]);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre2, hBoxExos[1], hBoxExos[2], hBoxExos[3]);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre3, hBoxExos[4]);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre4, hBoxExos[5]);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre5, hBoxExos[6]);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre6, hBoxExos[7]);
-		addSeparatorLine(pane11);
-		pane11.getChildren().addAll(sousTitre7, hBoxExos[8], hBoxExos[9]);
-		addSeparatorLine(pane11);
-		
+		VBox listeLiensExos = new VBox(9);
+		listeLiensExos.setStyle("-fx-background-color: #0E336A;");
+		listeLiensExos.setPadding(new Insets(50));
+		listeLiensExos.getChildren().addAll(titrePage);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre1, hBoxExos[0]);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre2, hBoxExos[1], hBoxExos[2], hBoxExos[3]);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre3, hBoxExos[4]);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre4, hBoxExos[5]);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre5, hBoxExos[6]);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre6, hBoxExos[7]);
+		addSeparatorLine(listeLiensExos);
+		listeLiensExos.getChildren().addAll(sousTitre7, hBoxExos[8], hBoxExos[9]);
+		addSeparatorLine(listeLiensExos);
+
 		// ---------------------------------------------------------------\\
 		// Stage & Scene + scrollbar
-		
-
-		root.setLeft(listeExos);
 
 		ScrollPane spane = new ScrollPane() {
-			public void requestFocus() {}
+			public void requestFocus() {
+			}
 		};
+
 		addHandlerToLogoButton(logoButton, root, spane);
-		spane.setContent(pane11);
+		spane.setContent(listeLiensExos);
 		spane.setFitToWidth(true);
 		spane.setFitToHeight(true);
 		root.setCenter(spane);
 		root.setTop(entete);
 		addPopupToButton(connexionButton);
-		Scene scene = new Scene(root, 1000, 800);
+
 		String cssFile = getClass().getResource("Application.css").toExternalForm();
+		Scene scene = new Scene(root, 1000, 800);
 		scene.getStylesheets().add(cssFile);
+
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -406,10 +373,6 @@ public class ExerciseSelectionPage extends Application {
 		});
 	}
 
-	public static void main(String... args) {
-		launch(args);
-	}
-
 	private static void addPopupToButton(Button button) {
 		button.setOnAction(event -> {
 			ConnexionScreen popup = new ConnexionScreen();
@@ -442,14 +405,15 @@ public class ExerciseSelectionPage extends Application {
 			}
 		});
 	}
+
 	private TextArea pageExo(VBox pane11, int numeroExo, BorderPane root, VBox exercices, HBox header) {
 		TextArea codeArea = new TextArea();
 		HBox middleBox = new HBox();
-		Label executionSuccess = new Label("");
+		Label executionSuccess = new Label();
 		executionSuccess.setStyle("-fx-text-fill: black; -fx-font-size: 20px;");
 		Region springMiddle = new Region();
 		HBox.setHgrow(springMiddle, Priority.ALWAYS);
-		middleBox.getChildren().addAll(executionSuccess,springMiddle);
+		middleBox.getChildren().addAll(executionSuccess, springMiddle);
 		TextArea terminal = new TextArea();
 		String terminalStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;-fx-font-size:15px; ";
 		String codeAreaStyle = "-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: white;  ";
@@ -487,7 +451,6 @@ public class ExerciseSelectionPage extends Application {
 		listActionsWhiteMenuBar.getMenus().add(listActionsWhiteMenu);
 		listActionsWhiteMenuBar.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 
-
 		Button playWhiteButton = new Button();
 		playWhiteButton.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
 		input = getClass().getResourceAsStream("/image/play-blanc.png");
@@ -513,10 +476,14 @@ public class ExerciseSelectionPage extends Application {
 		reduceWhiteButton1.setGraphic(reduceWhiteImageView1);
 		EventHandler<ActionEvent> eventHandlerReduce1 = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				if (!pane11.getChildren().contains(middleBox)) pane11.getChildren().add(middleBox);
-				if (!pane11.getChildren().contains(terminal)) pane11.getChildren().add(terminal);
-				if (!root.getChildren().contains(header)) root.setTop(header);
-				if (!root.getChildren().contains(exercices)) root.setLeft(exercices);
+				if (!pane11.getChildren().contains(middleBox))
+					pane11.getChildren().add(middleBox);
+				if (!pane11.getChildren().contains(terminal))
+					pane11.getChildren().add(terminal);
+				if (!root.getChildren().contains(header))
+					root.setTop(header);
+				if (!root.getChildren().contains(exercices))
+					root.setLeft(exercices);
 				codeArea.setPrefHeight(450);
 			}
 		};
@@ -563,7 +530,9 @@ public class ExerciseSelectionPage extends Application {
 			public void handle(ActionEvent event) {
 				double currentSize = terminal.getFont().getSize();
 				if (currentSize >= 8) { // taille minimale est 8
-					terminal.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" + "-fx-font-size: " + (currentSize - 1) +"px");
+					terminal.setStyle(
+							"-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;"
+									+ "-fx-font-size: " + (currentSize - 1) + "px");
 				}
 			}
 		};
@@ -580,7 +549,9 @@ public class ExerciseSelectionPage extends Application {
 			public void handle(ActionEvent event) {
 				double currentSize = terminal.getFont().getSize();
 				if (currentSize < 30) { // taille max est 30
-					terminal.setStyle("-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;" + "-fx-font-size: " + (currentSize +1) +"px");
+					terminal.setStyle(
+							"-fx-control-inner-background:#000000; -fx-font-family: Consolas; -fx-highlight-fill: #00ff00; -fx-highlight-text-fill: #000000; -fx-text-fill: #00ff00;"
+									+ "-fx-font-size: " + (currentSize + 1) + "px");
 				}
 			}
 		};
@@ -596,7 +567,7 @@ public class ExerciseSelectionPage extends Application {
 		closeWhiteImageView.setFitHeight(15);
 		closeWhiteButton.setGraphic(closeWhiteImageView);
 		buttonsTerminal.getChildren().addAll(reduceWhiteButton2, increaseWhiteButton2, closeWhiteButton);
-		pane11.getChildren().addAll(codeAreaPane, middleBox,terminal);
+		pane11.getChildren().addAll(codeAreaPane, middleBox, terminal);
 
 		EventHandler<ActionEvent> eventHandlerOpenTerminal = new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -620,11 +591,15 @@ public class ExerciseSelectionPage extends Application {
 				pane11.getChildren().remove(middleBox);
 				codeArea.setPrefHeight(1000);
 				terminal.setText("");
-				}
+			}
 		};
 		closeWhiteButton.addEventHandler(ActionEvent.ACTION, eventHandlerCloseTerminal);
 		codeAreaPane.setAlignment(Pos.TOP_RIGHT);
 		StackPane.setAlignment(buttonsCodeArea, Pos.TOP_RIGHT);
 		return codeArea;
+	}
+
+	public static void main(String... args) {
+		launch(args);
 	}
 }
