@@ -26,7 +26,7 @@ public class Controller{
 				button.setGraphic(imageViewBonhommeContent);
 				;
 			} else if (button.getGraphic().equals(imageViewBonhommeContent)) {
-				button.setGraphic(imageViewSablier);
+				button.setGraphic(imageViewBonhommeTriste);
 				;
 			}
 		});
@@ -44,10 +44,13 @@ public class Controller{
 			}
 		});
 	}
-    public static void addHandlerToLogoButton(Button logoButton, BorderPane root, ScrollPane pane) {
+    public static void addHandlerToLogoButton(Button logoButton, BorderPane root, ScrollPane pane, HBox middleBox,VBox containerExo,Label executionText,TextArea terminal) {
 		logoButton.setOnAction(event -> {
 			try {
 				root.setCenter(pane);
+				middleBox.setStyle("");
+				executionText.setText("");
+				terminal.setText("");
 
 			} catch (Exception e) {
 				e.printStackTrace();

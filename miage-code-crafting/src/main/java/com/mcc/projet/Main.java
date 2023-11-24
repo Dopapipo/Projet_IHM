@@ -49,7 +49,7 @@ import javafx.stage.Stage;
 //Tous nos Labels sur la page de séléction des exercices, et pour cela il a fallu override la méthode
 //requestFocus() de notre instance de ScrollPane pour qu'elle ne fasse rien.
 
-public class ExerciseSelectionPage extends Application {
+public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
@@ -291,7 +291,12 @@ public class ExerciseSelectionPage extends Application {
 		// Clic Exercice précis -> Page de l'exercice \\
 
 		VBox exos = new VBox();
-		TextArea codeArea = pageExo(exos, root, listeExos, entete);
+		//spane sert à pouvoir scroll sur la liste des exos
+		ScrollPane spane = new ScrollPane() {
+			public void requestFocus() { //bugfix pour que spane n'ait jamais le focusc
+			}
+		};
+		TextArea codeArea = pageExo(exos, root, listeExos, entete,spane,logoButton);
 		for (int i = 0; i < boutonsExos.length / 2; i++) {
 			Controller.addEventHandler(boutonsExos[2 * i], i + 1, root, exos, codeArea);
 			Controller.addEventHandler(boutonsExos[2 * i + 1], i + 1, root, exos, codeArea);
@@ -322,12 +327,8 @@ public class ExerciseSelectionPage extends Application {
 		// ---------------------------------------------------------------\\
 		// Stage & Scene + scrollbar
 
-		ScrollPane spane = new ScrollPane() {
-			public void requestFocus() {
-			}
-		};
 
-		Controller.addHandlerToLogoButton(logoButton, root, spane);
+
 		spane.setContent(listeLiensExos);
 		spane.setFitToWidth(true);
 		spane.setFitToHeight(true);
@@ -351,7 +352,7 @@ public class ExerciseSelectionPage extends Application {
 		container.getChildren().add(separator);
 	}
 
-	private TextArea pageExo(VBox pane11, BorderPane root, VBox exercices, HBox header) {
+	private TextArea pageExo(VBox pane11, BorderPane root, VBox exercices, HBox header,ScrollPane spane,Button logoButton) {
 		TextArea codeArea = new TextArea();
 		HBox middleBox = new HBox();
 		Label executionSuccess = new Label();
@@ -396,7 +397,6 @@ public class ExerciseSelectionPage extends Application {
 		MenuBar listActionsWhiteMenuBar = new MenuBar();
 		listActionsWhiteMenuBar.getMenus().add(listActionsWhiteMenu);
 		listActionsWhiteMenuBar.setStyle("-fx-background-color: #000; -fx-text-fill: white;");
-
 		String style = "-fx-background-color: #000; -fx-text-fill: white;";
 		Button playWhiteButton = new Button();
 		input = getClass().getResourceAsStream("/image/play-blanc.png");
@@ -434,11 +434,11 @@ public class ExerciseSelectionPage extends Application {
 		// On initialise tous les boutons associés au terminal
 		// Avec leurs images et leurs handlers
 		Button reduceWhiteButton2 = new Button();
-		input = getClass().getResourceAsStream("/image/retrecir-blanc.png");
+		input = getClass().getResourceAsStream("/image/lettre-a.png");
 		initializeImageToNode(input, reduceWhiteButton2, style);
 		Controller.addReduceFontTerminalHandler(reduceWhiteButton2, terminal);
 		Button increaseWhiteButton2 = new Button();
-		input = getClass().getResourceAsStream("/image/agrandir-lecran-blanc.png");
+		input = getClass().getResourceAsStream("/image/A.png");
 		initializeImageToNode(input, increaseWhiteButton2, style);
 		Button closeWhiteButton = new Button();
 		input = getClass().getResourceAsStream("/image/fermer-blanc.png");
@@ -450,10 +450,13 @@ public class ExerciseSelectionPage extends Application {
 		buttonsTerminal.getChildren().addAll(reduceWhiteButton2, increaseWhiteButton2, closeWhiteButton);
 		pane11.getChildren().addAll(codeAreaPane, middleBox, terminal);
 		StackPane.setAlignment(buttonsCodeArea, Pos.TOP_RIGHT);
+		VBox.setVgrow(terminal, Priority.SOMETIMES);
 		// On ajoute tous les handlers nécéssaires au fonctionnement de la page
 		Controller.addIncreaseFontTerminalHandler(increaseWhiteButton2, terminal);
 		Controller.addExecuteHandler(playWhiteButton, codeArea, terminal, pane11, middleBox, executionSuccess);
 		Controller.addCloseTerminalHandler(closeWhiteButton, codeArea, terminal, pane11, middleBox);
+		Controller.addHandlerToLogoButton(logoButton, root, spane,middleBox,pane11,executionSuccess,terminal);
+
 		return codeArea;
 	}
 
