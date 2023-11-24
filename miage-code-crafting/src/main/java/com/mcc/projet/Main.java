@@ -141,7 +141,6 @@ public class Main extends Application {
 		Text universite = new Text("Université Paris 1 Panthéon-Sorbonne");
 		universite.setFont(Font.font("Arial", 10));
 		universite.setFill(Color.BLACK);
-
 		titre.getChildren().addAll(poo, miage, universite);
 		entete.getChildren().addAll(titre, headerSpring2);
 
@@ -463,7 +462,7 @@ public class Main extends Application {
 	public static void main(String... args) {
 		launch(args);
 	}
-
+	//le polymorphisme en java, c'est vraiment cool!
 	public static void initializeImageToNode(InputStream input, Labeled node, String style) {
 		node.setStyle(style);
 		ImageView view = new ImageView(new Image(input));
