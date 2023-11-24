@@ -1,5 +1,5 @@
 module com.mcc.projet {
-    requires javafx.controls;
+    requires transitive javafx.controls;
     requires javafx.fxml;
     requires javafx.graphics;
 
